@@ -16,7 +16,7 @@ const AnimatedPhilosophyItem = ({ children, index }: { children: React.ReactNode
       ref={ref}
       className={cn(
         "transition-all duration-700 ease-out transform",
-        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10' // Changed to slide from left
       )}
     >
       {children}
@@ -109,3 +109,4 @@ export function PhilosophySection() {
     </section>
   );
 }
+
