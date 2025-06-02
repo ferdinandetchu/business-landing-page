@@ -16,6 +16,7 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 230 20% 27%;
     --primary: 230 50% 40%; /* Darker Blue */
+    --primary-hsl: 230 50% 40%; /* Added for gradient */
     --primary-foreground: 0 0% 100%;
     --secondary: 220 13% 91%;
     --secondary-foreground: 230 20% 27%;
@@ -53,6 +54,7 @@ body {
     --popover: 230 15% 20%;
     --popover-foreground: 220 17% 95%;
     --primary: 230 50% 55%; /* Darker Blue for dark theme */
+    --primary-hsl: 230 50% 55%; /* Added for gradient */
     --primary-foreground: 0 0% 100%; /* Adjusted for better contrast if needed, white usually works */
     --secondary: 230 15% 25%;
     --secondary-foreground: 220 17% 95%;
@@ -106,9 +108,10 @@ body {
     border-radius: inherit;
     background: radial-gradient(
       600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), /* Default to center */
-      hsla(var(--accent-hsl), 0.35) 0%,    /* Accent color, fairly prominent */
-      hsla(var(--accent-hsl), 0.0) 55%,  /* Fade out accent to transparent */
-      transparent 65%                    /* Ensure fully transparent beyond this */
+      hsla(var(--primary-hsl), 0.25) 0%,    /* Primary color, subtle inner glow */
+      hsla(var(--accent-hsl), 0.35) 30%,    /* Accent color, more prominent */
+      hsla(var(--accent-hsl), 0.0) 60%,  /* Fade out accent to transparent */
+      transparent 70%                    /* Ensure fully transparent beyond this */
     );
     pointer-events: none;
     transition: background 0.05s linear; /* Fast transition for mouse tracking */

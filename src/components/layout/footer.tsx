@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { InteractiveGradientBackground } from '@/components/interactive-gradient-background';
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
@@ -11,7 +12,11 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="border-t border-border/40 bg-background">
+    <InteractiveGradientBackground 
+      as="footer" 
+      className="border-t border-border/40 bg-background" 
+      randomIdle={true}
+    >
       <div className="container flex flex-col items-center justify-center gap-2 py-8 max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-center text-sm leading-loose text-muted-foreground">
           © {currentYear || new Date().getFullYear()} FYCARD Consulting and Outsourcing. All rights reserved.
@@ -27,6 +32,6 @@ export function Footer() {
           </a>
         </p>
       </div>
-    </footer>
+    </InteractiveGradientBackground>
   );
 }
