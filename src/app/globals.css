@@ -150,18 +150,23 @@ body {
     position: absolute;
     inset: 0;
     background-image: 
-      /* Existing 5 */
+      /* Existing 10 */
       radial-gradient(circle at 20% 25%, transparent 60px, hsla(0, 0%, 100%, 0.05) 60px, hsla(0, 0%, 100%, 0.05) 62px, transparent 62px),
       radial-gradient(circle at 75% 40%, transparent 40px, hsla(0, 0%, 100%, 0.07) 40px, hsla(0, 0%, 100%, 0.07) 42px, transparent 42px),
       radial-gradient(circle at 30% 75%, transparent 20px, hsla(0, 0%, 100%, 0.04) 20px, hsla(0, 0%, 100%, 0.04) 22px, transparent 22px),
       radial-gradient(circle at 80% 15%, transparent 30px, hsla(0, 0%, 100%, 0.06) 30px, hsla(0, 0%, 100%, 0.06) 32px, transparent 32px),
       radial-gradient(circle at 65% 85%, transparent 25px, hsla(0, 0%, 100%, 0.05) 25px, hsla(0, 0%, 100%, 0.05) 27px, transparent 27px),
-      /* New 5 */
       radial-gradient(circle at 50% 50%, transparent 50px, hsla(0, 0%, 100%, 0.06) 50px, hsla(0, 0%, 100%, 0.06) 52px, transparent 52px),
       radial-gradient(circle at 10% 10%, transparent 22px, hsla(0, 0%, 100%, 0.04) 22px, hsla(0, 0%, 100%, 0.04) 24px, transparent 24px),
       radial-gradient(circle at 90% 90%, transparent 35px, hsla(0, 0%, 100%, 0.05) 35px, hsla(0, 0%, 100%, 0.05) 37px, transparent 37px),
       radial-gradient(circle at 5% 60%, transparent 45px, hsla(0, 0%, 100%, 0.03) 45px, hsla(0, 0%, 100%, 0.03) 47px, transparent 47px),
-      radial-gradient(circle at 95% 30%, transparent 18px, hsla(0, 0%, 100%, 0.07) 18px, hsla(0, 0%, 100%, 0.07) 20px, transparent 20px);
+      radial-gradient(circle at 95% 30%, transparent 18px, hsla(0, 0%, 100%, 0.07) 18px, hsla(0, 0%, 100%, 0.07) 20px, transparent 20px),
+      /* New 5 */
+      radial-gradient(circle at 15% 80%, transparent 15px, hsla(0, 0%, 100%, 0.05) 15px, hsla(0, 0%, 100%, 0.05) 17px, transparent 17px),
+      radial-gradient(circle at 85% 60%, transparent 30px, hsla(0, 0%, 100%, 0.06) 30px, hsla(0, 0%, 100%, 0.06) 32px, transparent 32px),
+      radial-gradient(circle at 40% 10%, transparent 55px, hsla(0, 0%, 100%, 0.04) 55px, hsla(0, 0%, 100%, 0.04) 57px, transparent 57px),
+      radial-gradient(circle at 5% 95%, transparent 10px, hsla(0, 0%, 100%, 0.07) 10px, hsla(0, 0%, 100%, 0.07) 12px, transparent 12px),
+      radial-gradient(circle at 50% 30%, transparent 28px, hsla(0, 0%, 100%, 0.03) 28px, hsla(0, 0%, 100%, 0.03) 30px, transparent 30px);
     background-repeat: no-repeat;
     background-size: 300% 300%;
     animation: bg-circles-drift-x 30s linear infinite alternate, bg-circles-drift-y 37s linear infinite alternate;
@@ -177,6 +182,3 @@ body {
     z-index: 1;
   }
 }
-
-
-    
