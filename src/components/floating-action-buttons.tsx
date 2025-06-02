@@ -33,8 +33,8 @@ export function FloatingActionButtons() {
   const [showAIPrompt, setShowAIPrompt] = useState(false);
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
 
-  const aiPromptDisplayDuration = 10000; // 10 seconds
-  const whatsAppPromptDisplayDuration = 15000; // 15 seconds
+  const aiPromptDisplayDuration = 10000; 
+  const whatsAppPromptDisplayDuration = 15000; 
 
   const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -49,13 +49,13 @@ export function FloatingActionButtons() {
     if (!showWhatsAppPrompt && !whatsAppPromptTimeoutRef.current) { 
         setShowWhatsAppPrompt(true);
     }
-  }, [showWhatsAppPrompt]); // Removed aiPromptDisplayDuration from dependencies as it's constant
+  }, [showWhatsAppPrompt]); 
 
   // Effect to show the AI popover initially
   useEffect(() => {
     const initialShowTimer = setTimeout(() => {
       setShowAIPrompt(true);
-    }, 5000); // 5 seconds
+    }, 5000); 
     return () => clearTimeout(initialShowTimer);
   }, []);
 
@@ -101,8 +101,6 @@ export function FloatingActionButtons() {
     if (!open && showAIPrompt) { 
       triggerWhatsAppPrompt(); 
     } else if (open && !showAIPrompt) { 
-      // If user re-opens it manually, show it and clear any pending auto-hide for AI.
-      // Then restart its own auto-hide.
       if(aiPromptTimeoutRef.current) clearTimeout(aiPromptTimeoutRef.current);
       setShowAIPrompt(true);
     } else { 
@@ -144,7 +142,7 @@ export function FloatingActionButtons() {
           </PopoverTrigger>
           <PopoverContent 
             side="left" 
-            className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2"
+            className="w-auto p-2 bg-background text-foreground border border-primary shadow-lg mr-2"
             onOpenAutoFocus={(e) => e.preventDefault()}
           >
             <p className="text-sm font-medium">Try the AI Business Assistant!</p>
@@ -172,7 +170,7 @@ export function FloatingActionButtons() {
           </PopoverTrigger>
           <PopoverContent
             side="left"
-            className="w-auto p-2 bg-accent text-accent-foreground border-accent shadow-lg mr-2"
+            className="w-auto p-2 bg-background text-foreground border border-accent shadow-lg mr-2"
             onOpenAutoFocus={(e) => e.preventDefault()}
           >
             <p className="text-sm font-medium">Talk to one of our consultants!</p>
