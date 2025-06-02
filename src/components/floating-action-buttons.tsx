@@ -5,6 +5,17 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Brain } from 'lucide-react';
 import type React from 'react';
+import { useState, useEffect } from 'react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 // SVG Icon for WhatsApp
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -24,39 +35,78 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export function FloatingActionButtons() {
-  // IMPORTANT: Replace this with your actual WhatsApp number including the country code, without '+' or leading zeros.
   const whatsappNumber = "12345678900"; 
+  const [showAssistantDialog, setShowAssistantDialog] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAssistantDialog(true);
+    }, 5000); // 5 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
+  const handleTryAssistant = () => {
+    setShowAssistantDialog(false);
+    const advisorSection = document.getElementById('advisor');
+    if (advisorSection) {
+      advisorSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Fallback if the section isn't found
+      window.location.hash = '#advisor';
+    }
+  };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
-      <Button
-        asChild
-        variant="default"
-        size="icon"
-        className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow animate-attention-bounce"
-        aria-label="Try AI Business Assistant"
-        title="Try AI Business Assistant"
-      >
-        <Link href="#advisor">
-          <Brain className="h-7 w-7" />
-        </Link>
-      </Button>
-      <Button
-        asChild
-        variant="default" // You might want a different variant or custom styling for WhatsApp
-        size="icon"
-        className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent hover:bg-accent/90 text-accent-foreground"
-        aria-label="Contact us on WhatsApp"
-        title="Contact on WhatsApp"
-      >
-        <a
-          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
+        <Button
+          asChild
+          variant="default"
+          size="icon"
+          className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow animate-attention-bounce"
+          aria-label="Try AI Business Assistant"
+          title="Try AI Business Assistant"
         >
-          <WhatsAppIcon className="h-7 w-7" />
-        </a>
-      </Button>
-    </div>
+          <Link href="#advisor">
+            <Brain className="h-7 w-7" />
+          </Link>
+        </Button>
+        <Button
+          asChild
+          variant="default"
+          size="icon"
+          className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent hover:bg-accent/90 text-accent-foreground"
+          aria-label="Contact us on WhatsApp"
+          title="Contact on WhatsApp"
+        >
+          <a
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <WhatsAppIcon className="h-7 w-7" />
+          </a>
+        </Button>
+      </div>
+
+      <AlertDialog open={showAssistantDialog} onOpenChange={setShowAssistantDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Try Our AI Business Assistant!</AlertDialogTitle>
+            <AlertDialogDescription>
+              Get instant insights and strategic advice for your business challenges. 
+              Our AI assistant is ready to help you find solutions and plan your next steps.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setShowAssistantDialog(false)}>Maybe Later</AlertDialogCancel>
+            <AlertDialogAction onClick={handleTryAssistant}>
+              Try it Now
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
