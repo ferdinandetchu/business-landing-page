@@ -1,9 +1,39 @@
 
+"use client";
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
+
+const heroDescriptions = [
+  "Expert Solutions for Complex Challenges. We specialize in scientific research rewriting, data analysis, business consulting, and project management.",
+  "Driving Innovation Through Insightful Data Analysis and Strategic Business Consulting.",
+  "Your Partner in Scientific Advancement, Business Growth, and Project Excellence.",
+  "Transforming Ideas into Impactful Results with Our Comprehensive Suite of Services."
+];
 
 export function HeroSection() {
+  const [currentDescriptionIndex, setCurrentDescriptionIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const textChangeInterval = 4000; // Time each text is visible
+    const fadeDuration = 500; // Duration of the fade animation
+
+    const intervalId = setInterval(() => {
+      setIsFading(true); // Start fade out
+
+      setTimeout(() => {
+        setCurrentDescriptionIndex((prevIndex) => (prevIndex + 1) % heroDescriptions.length);
+        setIsFading(false); // Start fade in
+      }, fadeDuration);
+    }, textChangeInterval + fadeDuration); // Total cycle time
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <section
       id="hero"
@@ -29,8 +59,13 @@ export function HeroSection() {
           <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             FYCARD Consulting and Outsourcing
           </h1>
-          <p className="mt-6 max-w-3xl mx-auto text-lg leading-8 text-neutral-200 sm:text-xl">
-            Expert Solutions for Complex Challenges. We specialize in scientific research rewriting, data analysis, business consulting, and project management.
+          <p
+            className={cn(
+              "mt-6 max-w-3xl mx-auto text-lg leading-8 text-neutral-200 sm:text-xl transition-opacity duration-500 ease-in-out",
+              isFading ? "opacity-0" : "opacity-100"
+            )}
+          >
+            {heroDescriptions[currentDescriptionIndex]}
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
