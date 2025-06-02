@@ -50,7 +50,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2">
           <Target className={cn("h-7 w-7 transition-colors", logoColorClass)} />
           <span className={cn("font-headline text-base md:text-lg font-semibold transition-colors", logoColorClass)}>
-            FYCARD Consulting and Outsourcing
+            FYCARD<span className="hidden md:inline"> Consulting and Outsourcing</span>
           </span>
         </Link>
         
