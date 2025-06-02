@@ -183,7 +183,7 @@ export function ContactSection() {
 
           <AnimatedContactCard index={1}>
             <div className="space-y-8 h-full"> 
-              <Card className="h-full text-primary-foreground border-0">
+              <Card className="h-full text-primary-foreground border-0 bg-transparent">
                 <CardHeader>
                   <CardTitle className="font-headline text-2xl text-primary-foreground">Direct Contact</CardTitle>
                   <CardDescription className="text-primary-foreground/80">Reach out to us directly through these channels.</CardDescription>
@@ -223,3 +223,4 @@ export function ContactSection() {
     </section>
   );
 }
+
