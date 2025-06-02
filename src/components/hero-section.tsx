@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -13,7 +14,7 @@ export function HeroSection() {
           layout="fill"
           objectFit="cover"
           className="filter blur-sm" 
-          data-ai-hint="professionals collaboration"
+          data-ai-hint="modern office"
           priority
         />
         <div className="absolute inset-0 bg-black/50"></div> {/* Overlay for text readability */}
