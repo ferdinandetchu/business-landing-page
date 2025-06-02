@@ -82,7 +82,7 @@ export function ContactSection() {
   return (
     <section 
       id="contact" 
-      className="py-16 sm:py-24 bg-primary" 
+      className="py-16 sm:py-24 bg-primary animate-radial-accent-intro bg-radial-primary-accent bg-circles-overlay" 
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">

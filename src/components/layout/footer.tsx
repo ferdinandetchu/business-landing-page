@@ -12,7 +12,7 @@ export function Footer() {
 
   return (
     <footer 
-      className="border-t border-primary-foreground/20 bg-primary" 
+      className="border-t border-primary-foreground/20 bg-primary bg-circles-overlay" 
     >
       <div className="container flex flex-col items-center justify-center gap-2 py-8 max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-center text-sm leading-loose text-primary-foreground/90">

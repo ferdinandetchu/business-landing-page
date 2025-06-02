@@ -139,4 +139,35 @@ body {
       hsl(var(--primary)) 100%
     );
   }
+
+  .bg-circles-overlay {
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element if it overflows */
+  }
+
+  .bg-circles-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+      /* Large circle, top left-ish */
+      radial-gradient(circle at 20% 25%, transparent 60px, hsla(0, 0%, 100%, 0.05) 60px, hsla(0, 0%, 100%, 0.05) 62px, transparent 62px),
+      /* Medium circle, center right-ish */
+      radial-gradient(circle at 75% 40%, transparent 40px, hsla(0, 0%, 100%, 0.07) 40px, hsla(0, 0%, 100%, 0.07) 42px, transparent 42px),
+      /* Small circle, bottom left-ish */
+      radial-gradient(circle at 30% 75%, transparent 20px, hsla(0, 0%, 100%, 0.04) 20px, hsla(0, 0%, 100%, 0.04) 22px, transparent 22px),
+      /* Another medium, top right */
+      radial-gradient(circle at 80% 15%, transparent 30px, hsla(0, 0%, 100%, 0.06) 30px, hsla(0, 0%, 100%, 0.06) 32px, transparent 32px),
+      /* Another small, mid-bottom right */
+      radial-gradient(circle at 65% 85%, transparent 25px, hsla(0, 0%, 100%, 0.05) 25px, hsla(0, 0%, 100%, 0.05) 27px, transparent 27px);
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0; /* Ensure it's behind the direct children's content */
+  }
+
+  /* Styles direct children of .bg-circles-overlay to be above the ::before pseudo-element */
+  .bg-circles-overlay > * {
+    position: relative;
+    z-index: 1;
+  }
 }
