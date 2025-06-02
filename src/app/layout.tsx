@@ -1,6 +1,8 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
+import { FloatingActionButtons } from '@/components/floating-action-buttons';
 
 export const metadata: Metadata = {
   title: 'FYCARD Consulting and Outsourcing',
@@ -23,6 +25,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         {children}
         <Toaster />
+        <FloatingActionButtons />
       </body>
     </html>
   );
