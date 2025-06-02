@@ -157,8 +157,8 @@ export function ContactSection() {
                   <Mail className="h-6 w-6 text-accent" />
                   <div>
                     <h4 className="font-semibold text-foreground">Email</h4>
-                    <a href="mailto:info@veritysolutions.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      info@veritysolutions.com
+                    <a href="mailto:info@fycardconsulting.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      info@fycardconsulting.com
                     </a>
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export function ContactSection() {
                   <MapPin className="h-6 w-6 text-accent" />
                   <div>
                     <h4 className="font-semibold text-foreground">Office</h4>
-                    <p className="text-muted-foreground">123 Verity Lane, Suite 404, Knowledge City, USA</p>
+                    <p className="text-muted-foreground">123 FYCARD Way, Suite 101, Business City, USA</p>
                   </div>
                 </div>
               </CardContent>

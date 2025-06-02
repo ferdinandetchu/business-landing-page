@@ -11,7 +11,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-1',
-    quote: "Verity Solutions transformed our research data into a compelling narrative that significantly boosted our grant application's success. Their professionalism and insight are unmatched.",
+    quote: "FYCARD Consulting and Outsourcing transformed our research data into a compelling narrative that significantly boosted our grant application's success. Their professionalism and insight are unmatched.",
     clientName: 'Dr. Eleanor Vance',
     clientRole: 'Lead Researcher',
     company: 'Innovatech Labs',
@@ -20,7 +20,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-2',
-    quote: "The business restructuring plan developed by Verity Solutions was a game-changer for our company. We're now more agile and profitable than ever before.",
+    quote: "The business restructuring plan developed by FYCARD Consulting and Outsourcing was a game-changer for our company. We're now more agile and profitable than ever before.",
     clientName: 'Marcus Chen',
     clientRole: 'CEO',
     company: 'Apex Industries',
@@ -29,7 +29,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-3',
-    quote: "Their expertise in NGO proposal writing helped us secure crucial funding for our community projects. We highly recommend Verity Solutions!",
+    quote: "Their expertise in NGO proposal writing helped us secure crucial funding for our community projects. We highly recommend FYCARD Consulting and Outsourcing!",
     clientName: 'Aisha Khan',
     clientRole: 'Director',
     company: 'Global Outreach Foundation',

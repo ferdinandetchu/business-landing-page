@@ -13,7 +13,7 @@ export function HeroSection() {
           Expert Solutions for Complex Challenges
         </h1>
         <p className="mt-6 max-w-3xl mx-auto text-lg leading-8 text-foreground/80 sm:text-xl">
-          Leveraging scientific precision and business acumen to drive your success. Verity Solutions offers unparalleled expertise in research, analysis, and strategic consulting.
+          Leveraging scientific precision and business acumen to drive your success. FYCARD Consulting and Outsourcing offers unparalleled expertise in research, analysis, and strategic consulting.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-shadow">

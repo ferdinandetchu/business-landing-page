@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Verity Solutions',
+  title: 'FYCARD Consulting and Outsourcing',
   description: 'Expert Solutions for Complex Challenges',
 };
 
