@@ -17,7 +17,7 @@ export function Footer() {
           &copy; {currentYear || new Date().getFullYear()} FYCARD Consulting and Outsourcing. All rights reserved.
         </p>
         <p className="text-center text-xs text-muted-foreground/80">
-          Built By PaveWay Group
+          Designed & Developed by PaveWay Technologies
         </p>
       </div>
     </footer>
