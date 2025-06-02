@@ -67,7 +67,6 @@ export function HeroSection() {
               "font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl transition-opacity duration-500 ease-in-out",
               isFading ? "opacity-0" : "opacity-100"
             )}
-            style={{ minHeight: '3em' }} // Add min-height to prevent layout shift, adjust as needed
           >
             {catchyPhrases[currentPhraseIndex]}
           </h1>
