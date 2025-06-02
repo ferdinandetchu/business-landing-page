@@ -34,7 +34,7 @@ export function FloatingActionButtons() {
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
 
   const aiPromptDisplayDuration = 10000; // 10 seconds
-  const whatsAppPromptDisplayDuration = 15000; // Changed to 15 seconds
+  const whatsAppPromptDisplayDuration = 15000; // 15 seconds
 
   const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -49,7 +49,7 @@ export function FloatingActionButtons() {
     if (!showWhatsAppPrompt && !whatsAppPromptTimeoutRef.current) { 
         setShowWhatsAppPrompt(true);
     }
-  }, [showWhatsAppPrompt]);
+  }, [showWhatsAppPrompt]); // Removed aiPromptDisplayDuration from dependencies as it's constant
 
   // Effect to show the AI popover initially
   useEffect(() => {
@@ -70,7 +70,7 @@ export function FloatingActionButtons() {
         aiPromptTimeoutRef.current = null;
       }
     };
-  }, [showAIPrompt, triggerWhatsAppPrompt]);
+  }, [showAIPrompt, triggerWhatsAppPrompt, aiPromptDisplayDuration]);
 
   // Effect to auto-hide WhatsApp popover
   useEffect(() => {
@@ -85,7 +85,7 @@ export function FloatingActionButtons() {
         whatsAppPromptTimeoutRef.current = null;
       }
     };
-  }, [showWhatsAppPrompt]);
+  }, [showWhatsAppPrompt, whatsAppPromptDisplayDuration]);
 
   const handleAIButtonClick = () => {
     triggerWhatsAppPrompt(); 
@@ -101,6 +101,9 @@ export function FloatingActionButtons() {
     if (!open && showAIPrompt) { 
       triggerWhatsAppPrompt(); 
     } else if (open && !showAIPrompt) { 
+      // If user re-opens it manually, show it and clear any pending auto-hide for AI.
+      // Then restart its own auto-hide.
+      if(aiPromptTimeoutRef.current) clearTimeout(aiPromptTimeoutRef.current);
       setShowAIPrompt(true);
     } else { 
        setShowAIPrompt(open);
@@ -152,9 +155,8 @@ export function FloatingActionButtons() {
           <PopoverTrigger asChild>
             <Button
               asChild
-              variant="default"
               size="icon"
-              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-green-500 hover:bg-green-600 text-white"
+              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent text-accent-foreground hover:bg-green-500 hover:text-white"
               aria-label="Contact us on WhatsApp"
               title="Contact on WhatsApp"
               onClick={handleWhatsAppButtonClick} 
