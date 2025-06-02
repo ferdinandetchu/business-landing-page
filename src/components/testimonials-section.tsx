@@ -28,6 +28,7 @@ export function TestimonialsSection() {
       as="section"
       id="testimonials"
       className="py-16 sm:py-24 bg-primary"
+      randomIdle={true}
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">

@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -104,12 +105,13 @@ body {
     inset: 0;
     border-radius: inherit;
     background: radial-gradient(
-      400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-      hsla(var(--accent-hsl), 0.15),
-      transparent 70%
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), /* Default to center */
+      hsla(var(--accent-hsl), 0.35) 0%,    /* Accent color, fairly prominent */
+      hsla(var(--accent-hsl), 0.0) 55%,  /* Fade out accent to transparent */
+      transparent 65%                    /* Ensure fully transparent beyond this */
     );
     pointer-events: none;
-    transition: background 0.05s linear;
+    transition: background 0.05s linear; /* Fast transition for mouse tracking */
     z-index: 0;
   }
 
