@@ -15,16 +15,16 @@ export function ServicesSection() {
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <Card key={service.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card text-card-foreground">
+            <Card key={service.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-primary text-primary-foreground">
               <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                <service.icon className="h-10 w-10 text-accent" aria-hidden="true" />
+                <service.icon className="h-10 w-10 text-primary-foreground" aria-hidden="true" />
                 <CardTitle className="font-headline text-xl text-primary-foreground">{service.name}</CardTitle>
               </CardHeader>
               <CardContent className="flex-grow">
                 <p className="text-primary-foreground/80">{service.description}</p>
               </CardContent>
               <div className="p-6 pt-0">
-                <Button variant="outline" className="w-full border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+                <Button variant="outline" className="w-full border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary" asChild>
                   <Link href={`#contact?service=${encodeURIComponent(service.name)}`}>Request This Service</Link>
                 </Button>
               </div>
