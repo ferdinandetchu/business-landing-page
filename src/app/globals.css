@@ -122,4 +122,8 @@ body {
     position: relative; 
     z-index: 1;
   }
+
+  .bg-radial-primary-accent {
+    background-image: radial-gradient(ellipse at center, hsl(var(--primary)) 20%, hsl(var(--accent)) 100%);
+  }
 }

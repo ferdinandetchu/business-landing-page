@@ -12,7 +12,7 @@ export function Footer() {
 
   return (
     <footer 
-      className="border-t border-border/40 bg-gradient-to-t from-primary to-accent" 
+      className="border-t border-border/40 bg-radial-primary-accent" 
     >
       <div className="container flex flex-col items-center justify-center gap-2 py-8 max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-center text-sm leading-loose text-primary-foreground/90">
