@@ -33,13 +33,26 @@ export function FloatingActionButtons() {
   const whatsappNumber = "12345678900"; 
   const [showAIPrompt, setShowAIPrompt] = useState(false);
 
+  // Effect to show the popover after 5 seconds
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const initialShowTimer = setTimeout(() => {
       setShowAIPrompt(true);
     }, 5000); // 5 seconds
 
-    return () => clearTimeout(timer); // Cleanup the timer
+    return () => clearTimeout(initialShowTimer);
   }, []);
+
+  // Effect to hide the popover 10 seconds after it's shown
+  useEffect(() => {
+    let autoHideTimer: NodeJS.Timeout;
+    if (showAIPrompt) {
+      autoHideTimer = setTimeout(() => {
+        setShowAIPrompt(false);
+      }, 10000); // 10 seconds
+    }
+    return () => clearTimeout(autoHideTimer);
+  }, [showAIPrompt]);
+
 
   // If user clicks the AI button, hide the prompt popover
   const handleAIButtonClick = () => {
@@ -69,7 +82,11 @@ export function FloatingActionButtons() {
                 <Brain className="h-7 w-7" />
               </Button>
           </PopoverTrigger>
-          <PopoverContent side="left" className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2">
+          <PopoverContent 
+            side="left" 
+            className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2"
+            onOpenAutoFocus={(e) => e.preventDefault()} // Prevents focus stealing
+          >
             <p className="text-sm font-medium">Try the AI Business Assistant!</p>
           </PopoverContent>
         </Popover>
