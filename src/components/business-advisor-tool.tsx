@@ -108,7 +108,7 @@ export function BusinessAdvisorTool() {
   };
 
   return (
-    <section id="advisor" className="py-16 sm:py-24 bg-background">
+    <section id="advisor" className="py-16 sm:py-24 bg-background lg:min-h-screen lg:flex lg:items-center">
       <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <AnimatedToolCard>
           <Card className="shadow-xl">
