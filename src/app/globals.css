@@ -164,7 +164,7 @@ body {
       radial-gradient(circle at 95% 30%, transparent 18px, hsla(0, 0%, 100%, 0.07) 18px, hsla(0, 0%, 100%, 0.07) 20px, transparent 20px);
     background-repeat: no-repeat;
     background-size: 300% 300%;
-    animation: bg-circles-drift-x 60s linear infinite alternate, bg-circles-drift-y 73s linear infinite alternate;
+    animation: bg-circles-drift-x 30s linear infinite alternate, bg-circles-drift-y 37s linear infinite alternate;
     background-position-x: 0%;
     background-position-y: 0%;
     pointer-events: none;
@@ -178,3 +178,5 @@ body {
   }
 }
 
+
+    
