@@ -94,7 +94,7 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <AnimatedContactCard index={0}>
-            <Card className="h-full bg-primary text-primary-foreground border-0">
+            <Card className="h-full bg-primary text-primary-foreground border-0 shadow-xl">
               <CardHeader>
                 <CardTitle className="font-headline text-2xl text-primary-foreground">Send Us a Message</CardTitle>
                 <CardDescription className="text-primary-foreground/80">Fill out the form and we'll respond as soon as possible.</CardDescription>
