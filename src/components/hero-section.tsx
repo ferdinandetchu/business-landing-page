@@ -9,12 +9,11 @@ export function HeroSection() {
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://placehold.co/1920x1080.png"
-          alt="Diverse professionals collaborating in a modern office"
+          src="https://images.unsplash.com/photo-1560185127-6ed189bf0249"
+          alt="Modern dining room with wooden table and chairs, minimalist decor"
           layout="fill"
           objectFit="cover"
-          className="filter blur-sm" 
-          data-ai-hint="modern office"
+          className="filter blur-sm"
           priority
         />
         <div className="absolute inset-0 bg-black/50"></div> {/* Overlay for text readability */}
