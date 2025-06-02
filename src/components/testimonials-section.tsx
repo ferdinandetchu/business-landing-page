@@ -23,11 +23,11 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonials" className="py-16 sm:py-24 bg-secondary/50">
+    <section id="testimonials" className="py-16 sm:py-24 bg-primary">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold tracking-tight text-primary sm:text-4xl">What Our Clients Say</h2>
-          <p className="mt-4 text-lg leading-8 text-foreground/80">
+          <h2 className="font-headline text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">What Our Clients Say</h2>
+          <p className="mt-4 text-lg leading-8 text-primary-foreground/90">
             Real stories from satisfied partners who achieved their goals with our help.
           </p>
         </div>
@@ -67,8 +67,8 @@ export function TestimonialsSection() {
           <CarouselNext className="hidden sm:flex" />
         </Carousel>
 
-        <div className="mt-16 pt-12 border-t border-border/40">
-          <h3 className="font-headline text-2xl font-semibold text-primary text-center mb-8">
+        <div className="mt-16 pt-12 border-t border-primary-foreground/20"> {/* Adjusted border color for contrast */}
+          <h3 className="font-headline text-2xl font-semibold text-primary-foreground text-center mb-8">
             Trusted By Leading Organizations
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
