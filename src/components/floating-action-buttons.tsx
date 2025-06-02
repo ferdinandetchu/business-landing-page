@@ -34,7 +34,7 @@ export function FloatingActionButtons() {
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
 
   const aiPromptDisplayDuration = 10000; 
-  const whatsAppPromptDisplayDuration = 60000; // Changed from 20000 to 60000
+  const whatsAppPromptDisplayDuration = 120000; // Changed from 60000 to 120000
 
   const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
