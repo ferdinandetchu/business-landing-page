@@ -94,10 +94,10 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <AnimatedContactCard index={0}>
-            <Card className="shadow-xl h-full bg-card/90 backdrop-blur-sm">
+            <Card className="shadow-xl h-full bg-primary text-primary-foreground">
               <CardHeader>
-                <CardTitle className="font-headline text-2xl text-primary">Send Us a Message</CardTitle>
-                <CardDescription>Fill out the form and we'll respond as soon as possible.</CardDescription>
+                <CardTitle className="font-headline text-2xl text-primary-foreground">Send Us a Message</CardTitle>
+                <CardDescription className="text-primary-foreground/80">Fill out the form and we'll respond as soon as possible.</CardDescription>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -107,9 +107,9 @@ export function ContactSection() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name</FormLabel>
+                          <FormLabel className="text-primary-foreground">Full Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" {...field} className="shadow-sm" />
+                            <Input placeholder="John Doe" {...field} className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -120,9 +120,9 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address</FormLabel>
+                          <FormLabel className="text-primary-foreground">Email Address</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="you@example.com" {...field} className="shadow-sm" />
+                            <Input type="email" placeholder="you@example.com" {...field} className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -133,9 +133,9 @@ export function ContactSection() {
                       name="service"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Service of Interest (Optional)</FormLabel>
+                          <FormLabel className="text-primary-foreground">Service of Interest (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="e.g., Data Analysis" {...field} className="shadow-sm" />
+                            <Input placeholder="e.g., Data Analysis" {...field} className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -146,20 +146,20 @@ export function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Message</FormLabel>
+                          <FormLabel className="text-primary-foreground">Message</FormLabel>
                           <FormControl>
                             <Textarea
                               placeholder="Tell us about your project or inquiry..."
                               rows={5}
                               {...field}
-                              className="shadow-sm"
+                              className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground"
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full text-lg py-3" disabled={form.formState.isSubmitting}>
+                    <Button type="submit" className="w-full text-lg py-3 bg-accent text-accent-foreground hover:bg-accent/90" disabled={form.formState.isSubmitting}>
                       {form.formState.isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 h-4 w-4" /></>}
                     </Button>
                   </form>
@@ -170,17 +170,17 @@ export function ContactSection() {
 
           <AnimatedContactCard index={1}>
             <div className="space-y-8 h-full"> 
-              <Card className="shadow-xl h-full bg-card/90 backdrop-blur-sm">
+              <Card className="shadow-xl h-full bg-primary text-primary-foreground">
                 <CardHeader>
-                  <CardTitle className="font-headline text-2xl text-primary">Direct Contact</CardTitle>
-                  <CardDescription>Reach out to us directly through these channels.</CardDescription>
+                  <CardTitle className="font-headline text-2xl text-primary-foreground">Direct Contact</CardTitle>
+                  <CardDescription className="text-primary-foreground/80">Reach out to us directly through these channels.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Mail className="h-6 w-6 text-accent" />
                     <div>
-                      <h4 className="font-semibold text-foreground">Email</h4>
-                      <a href="mailto:info@fycardconsulting.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      <h4 className="font-semibold text-primary-foreground">Email</h4>
+                      <a href="mailto:info@fycardconsulting.com" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                         info@fycardconsulting.com
                       </a>
                     </div>
@@ -188,8 +188,8 @@ export function ContactSection() {
                   <div className="flex items-center gap-3">
                     <Phone className="h-6 w-6 text-accent" />
                     <div>
-                      <h4 className="font-semibold text-foreground">Phone</h4>
-                      <a href="tel:+237671097299" className="text-muted-foreground hover:text-primary transition-colors">
+                      <h4 className="font-semibold text-primary-foreground">Phone</h4>
+                      <a href="tel:+237671097299" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                         +237671097299
                       </a>
                     </div>
@@ -197,8 +197,8 @@ export function ContactSection() {
                   <div className="flex items-center gap-3">
                     <MapPin className="h-6 w-6 text-accent" />
                     <div>
-                      <h4 className="font-semibold text-foreground">Office</h4>
-                      <p className="text-muted-foreground">CM Buea, Sosoliso</p>
+                      <h4 className="font-semibold text-primary-foreground">Office</h4>
+                      <p className="text-primary-foreground/80">CM Buea, Sosoliso</p>
                     </div>
                   </div>
                 </CardContent>
