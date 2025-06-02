@@ -72,7 +72,7 @@ export function HeroSection() {
             {catchyPhrases[currentPhraseIndex]}
           </h1>
           <p
-            className="mt-6 max-w-3xl mx-auto text-lg leading-8 text-neutral-200 sm:text-xl"
+            className="mt-4 max-w-3xl mx-auto text-lg leading-8 text-neutral-200 sm:text-xl"
           >
             {staticHeroDescription}
           </p>
