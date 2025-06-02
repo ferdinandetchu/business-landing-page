@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useRef, useEffect, type HTMLAttributes, type ElementType } from 'react';
@@ -15,47 +16,56 @@ export function InteractiveGradientBackground({
   ...props
 }: InteractiveGradientBackgroundProps) {
   const containerRef = useRef<HTMLElement>(null);
+  // lastAppliedX/Y track the coordinates used in the last successful rAF update
+  // lastMouseEventX/Y track the coordinates from the latest mouse event
+  let lastAppliedX = useRef(-1000).current; // Start far off screen
+  let lastAppliedY = useRef(-1000).current;
+  let lastMouseEventX = useRef(-1000).current;
+  let lastMouseEventY = useRef(-1000).current;
+  let animationFrameId: number | null = null;
 
   useEffect(() => {
     const RENDER_THRESHOLD = 2; // Only update if mouse moved this many pixels
-    let lastX = -RENDER_THRESHOLD -1;
-    let lastY = -RENDER_THRESHOLD -1;
-    let animationFrameId: number | null = null;
 
     const handleMouseMove = (event: MouseEvent) => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        lastMouseEventX = event.clientX - rect.left;
+        lastMouseEventY = event.clientY - rect.top;
 
-        if (Math.abs(x - lastX) < RENDER_THRESHOLD && Math.abs(y - lastY) < RENDER_THRESHOLD && animationFrameId !== null) {
-          return;
-        }
-        lastX = x;
-        lastY = y;
-        
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
+        if (!animationFrameId) {
+          animationFrameId = requestAnimationFrame(() => {
+            if (containerRef.current) {
+              const dx = Math.abs(lastMouseEventX - lastAppliedX);
+              const dy = Math.abs(lastMouseEventY - lastAppliedY);
 
-        animationFrameId = requestAnimationFrame(() => {
-          if (containerRef.current) { // Check ref again inside rAF
-            containerRef.current.style.setProperty('--mouse-x', `${x}px`);
-            containerRef.current.style.setProperty('--mouse-y', `${y}px`);
-          }
-        });
+              if (dx >= RENDER_THRESHOLD || dy >= RENDER_THRESHOLD) {
+                containerRef.current.style.setProperty('--mouse-x', `${lastMouseEventX}px`);
+                containerRef.current.style.setProperty('--mouse-y', `${lastMouseEventY}px`);
+                lastAppliedX = lastMouseEventX;
+                lastAppliedY = lastMouseEventY;
+              }
+            }
+            animationFrameId = null; // Reset after execution
+          });
+        }
       }
     };
 
     const handleMouseLeave = () => {
-       if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
-      }
-      if (containerRef.current) {
-        // Set to a far-off position to animate out smoothly
-        containerRef.current.style.setProperty('--mouse-x', `-500px`);
-        containerRef.current.style.setProperty('--mouse-y', `-500px`);
+      lastMouseEventX = -500; // Target far-off position
+      lastMouseEventY = -500;
+
+      if (!animationFrameId) { // Similar logic to mousemove for scheduling update
+        animationFrameId = requestAnimationFrame(() => {
+          if (containerRef.current) {
+            containerRef.current.style.setProperty('--mouse-x', `-500px`);
+            containerRef.current.style.setProperty('--mouse-y', `-500px`);
+            lastAppliedX = -500;
+            lastAppliedY = -500;
+          }
+          animationFrameId = null; // Reset after execution
+        });
       }
     };
 
@@ -68,17 +78,18 @@ export function InteractiveGradientBackground({
     return () => {
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
       }
       if (currentRef) {
         currentRef.removeEventListener('mousemove', handleMouseMove);
         currentRef.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
-  }, []);
+  }, []); // lastAppliedX, lastAppliedY are stable refs for this effect's purpose
 
   return (
     <Component
-      ref={containerRef}
+      ref={containerRef as React.RefObject<any>}
       className={cn(
         'interactive-gradient-parent',
         className
