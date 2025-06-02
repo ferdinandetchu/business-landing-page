@@ -42,7 +42,7 @@ const AnimatedImage = ({ children }: { children: React.ReactNode }) => {
 
 export function PhilosophySection() {
   return (
-    <section id="philosophy" className="py-16 sm:py-24 bg-secondary/30">
+    <section id="philosophy" className="py-16 sm:py-24 bg-secondary/30 lg:min-h-screen lg:flex lg:items-center">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -94,11 +94,11 @@ export function PhilosophySection() {
           <AnimatedImage>
             <div className="relative h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-xl group">
               <Image
-                src="https://placehold.co/800x600.png"
-                alt="Abstract image representing innovation and collaboration"
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c7da?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Team collaborating in a modern office setting"
                 layout="fill"
                 objectFit="cover"
-                data-ai-hint="abstract collaboration"
+                data-ai-hint="team collaboration office"
                 className="transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent"></div>
