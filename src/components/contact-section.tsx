@@ -109,7 +109,11 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-primary-foreground">Full Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" {...field} className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground" />
+                            <Input 
+                              placeholder="John Doe" 
+                              {...field} 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30" 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -122,7 +126,12 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-primary-foreground">Email Address</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="you@example.com" {...field} className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground" />
+                            <Input 
+                              type="email" 
+                              placeholder="you@example.com" 
+                              {...field} 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30" 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -135,7 +144,11 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-primary-foreground">Service of Interest (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="e.g., Data Analysis" {...field} className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground" />
+                            <Input 
+                              placeholder="e.g., Data Analysis" 
+                              {...field} 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30" 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -152,7 +165,7 @@ export function ContactSection() {
                               placeholder="Tell us about your project or inquiry..."
                               rows={5}
                               {...field}
-                              className="shadow-sm bg-background text-foreground placeholder:text-muted-foreground"
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30"
                             />
                           </FormControl>
                           <FormMessage />

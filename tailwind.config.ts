@@ -66,6 +66,10 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        'input-on-primary': {
+          DEFAULT: 'hsl(var(--input-on-primary-background-hsl))',
+          foreground: 'hsl(var(--input-on-primary-foreground-hsl))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
