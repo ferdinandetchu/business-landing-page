@@ -166,8 +166,8 @@ export function ContactSection() {
                   <Phone className="h-6 w-6 text-accent" />
                   <div>
                     <h4 className="font-semibold text-foreground">Phone</h4>
-                    <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                      +1 (234) 567-890
+                    <a href="tel:+237671097299" className="text-muted-foreground hover:text-primary transition-colors">
+                      +237671097299
                     </a>
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export function ContactSection() {
                   <MapPin className="h-6 w-6 text-accent" />
                   <div>
                     <h4 className="font-semibold text-foreground">Office</h4>
-                    <p className="text-muted-foreground">123 FYCARD Way, Suite 101, Business City, USA</p>
+                    <p className="text-muted-foreground">CM Buea, Sosoliso</p>
                   </div>
                 </div>
               </CardContent>

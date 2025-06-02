@@ -29,12 +29,12 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export function FloatingActionButtons() {
-  const whatsappNumber = "12345678900"; 
+  const whatsappNumber = "237671097299"; 
   const [showAIPrompt, setShowAIPrompt] = useState(false);
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
 
   const aiPromptDisplayDuration = 10000; 
-  const whatsAppPromptDisplayDuration = 120000; // Changed from 60000 to 120000
+  const whatsAppPromptDisplayDuration = 120000; 
 
   const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -154,7 +154,7 @@ export function FloatingActionButtons() {
             <Button
               asChild
               size="icon"
-              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent text-accent-foreground hover:bg-green-500 hover:text-white"
+              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent text-accent-foreground hover:bg-[#25D366] hover:text-white"
               aria-label="Contact us on WhatsApp"
               title="Contact on WhatsApp"
               onClick={handleWhatsAppButtonClick} 
