@@ -16,7 +16,7 @@ export function ServicesSection() {
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <Card key={service.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-primary text-primary-foreground">
+            <Card key={service.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-primary text-primary-foreground border-0">
               <CardHeader className="flex flex-row items-center gap-4 pb-2">
                 <service.icon className="h-10 w-10 text-primary-foreground" aria-hidden="true" />
                 <CardTitle className="font-headline text-xl text-primary-foreground">{service.name}</CardTitle>
