@@ -51,11 +51,11 @@ const AnimatedTestimonialWrapper = ({ children, index }: { children: React.React
 
 export function TestimonialsSection() {
   const clientLogos = [
-    { id: 'logo1', src: '/app/apex.jpg', alt: 'Client Logo 1', dataAiHint: 'company logo' },
-    { id: 'logo2', src: '/apex.jpg', alt: 'Client Logo 2', dataAiHint: 'tech company' },
-    { id: 'logo3', src: '/apex.jpg', alt: 'Client Logo 3', dataAiHint: 'finance logo' },
-    { id: 'logo4', src: '/apex.jpg', alt: 'Client Logo 4', dataAiHint: 'startup logo' },
-    { id: 'logo5', src: '/apex.jpg', alt: 'Client Logo 5', dataAiHint: 'global firm' },
+    { id: 'logo1', src: 'https://images.unsplash.com/photo-1612810806695-30f7a8258391?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Client Logo 1', dataAiHint: 'company logo' },
+    { id: 'logo2', src: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Client Logo 2', dataAiHint: 'tech company' },
+    { id: 'logo3', src: 'https://images.unsplash.com/photo-1699671441371-568013519f45?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Client Logo 3', dataAiHint: 'finance logo' },
+    { id: 'logo4', src: 'https://images.unsplash.com/photo-1622465911368-72162f8da3e2?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Client Logo 4', dataAiHint: 'startup logo' },
+    { id: 'logo5', src: 'https://images.unsplash.com/photo-1662052955282-da15376f3919?q=80&w=2062&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Client Logo 5', dataAiHint: 'global firm' },
   ];
 
   const duplicatedClientLogos = [...clientLogos, ...clientLogos];
