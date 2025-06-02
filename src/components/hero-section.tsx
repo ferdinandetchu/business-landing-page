@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col" // Removed justify-center items-center from here
+      className="relative w-full min-h-screen flex flex-col overflow-visible" // Added overflow-visible
     >
       <Navbar /> {/* Render Navbar here, it will stick to the top */}
 
