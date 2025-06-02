@@ -1,3 +1,4 @@
+
 import { services, type Service } from '@/data/services';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -24,7 +25,7 @@ export function ServicesSection() {
                 <p className="text-primary-foreground/80">{service.description}</p>
               </CardContent>
               <div className="p-6 pt-0">
-                <Button variant="outline" className="w-full border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                   <Link href={`#contact?service=${encodeURIComponent(service.name)}`}>Request This Service</Link>
                 </Button>
               </div>
