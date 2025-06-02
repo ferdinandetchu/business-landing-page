@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Brain } from 'lucide-react';
 import type React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Popover,
   PopoverContent,
@@ -28,35 +28,69 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-
 export function FloatingActionButtons() {
   const whatsappNumber = "12345678900"; 
   const [showAIPrompt, setShowAIPrompt] = useState(false);
+  const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
 
-  // Effect to show the popover after 5 seconds
+  const aiPromptDisplayDuration = 10000; // 10 seconds
+  const whatsAppPromptDisplayDuration = 10000; // 10 seconds
+
+  const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const triggerWhatsAppPrompt = useCallback(() => {
+    if (aiPromptTimeoutRef.current) {
+      clearTimeout(aiPromptTimeoutRef.current);
+      aiPromptTimeoutRef.current = null;
+    }
+    setShowAIPrompt(false);
+    
+    // Only show WhatsApp prompt if it's not already active or scheduled to be active
+    // This check helps prevent re-triggering if multiple events try to show it.
+    if (!showWhatsAppPrompt && !whatsAppPromptTimeoutRef.current) { 
+        setShowWhatsAppPrompt(true);
+    }
+  }, [showWhatsAppPrompt]);
+
+  // Effect to show the AI popover initially
   useEffect(() => {
     const initialShowTimer = setTimeout(() => {
       setShowAIPrompt(true);
     }, 5000); // 5 seconds
-
     return () => clearTimeout(initialShowTimer);
   }, []);
 
-  // Effect to hide the popover 10 seconds after it's shown
+  // Effect for AI Popover: Auto-hide and trigger WhatsApp Popover
   useEffect(() => {
-    let autoHideTimer: NodeJS.Timeout;
     if (showAIPrompt) {
-      autoHideTimer = setTimeout(() => {
-        setShowAIPrompt(false);
-      }, 10000); // 10 seconds
+      aiPromptTimeoutRef.current = setTimeout(triggerWhatsAppPrompt, aiPromptDisplayDuration);
     }
-    return () => clearTimeout(autoHideTimer);
-  }, [showAIPrompt]);
+    return () => {
+      if (aiPromptTimeoutRef.current) {
+        clearTimeout(aiPromptTimeoutRef.current);
+        aiPromptTimeoutRef.current = null;
+      }
+    };
+  }, [showAIPrompt, triggerWhatsAppPrompt]);
 
+  // Effect to auto-hide WhatsApp popover
+  useEffect(() => {
+    if (showWhatsAppPrompt) {
+      whatsAppPromptTimeoutRef.current = setTimeout(() => {
+        setShowWhatsAppPrompt(false);
+      }, whatsAppPromptDisplayDuration);
+    }
+    return () => {
+      if (whatsAppPromptTimeoutRef.current) {
+        clearTimeout(whatsAppPromptTimeoutRef.current);
+        whatsAppPromptTimeoutRef.current = null;
+      }
+    };
+  }, [showWhatsAppPrompt]);
 
-  // If user clicks the AI button, hide the prompt popover
   const handleAIButtonClick = () => {
-    setShowAIPrompt(false);
+    triggerWhatsAppPrompt(); // This will hide AI prompt and show WhatsApp prompt
     // Smooth scroll to section
     const advisorSection = document.getElementById('advisor');
     if (advisorSection) {
@@ -65,11 +99,39 @@ export function FloatingActionButtons() {
       window.location.hash = '#advisor'; // Fallback
     }
   };
+  
+  const handleAIPopoverOpenChange = (open: boolean) => {
+    if (!open && showAIPrompt) { // If AI popover is closed by user (e.g. click outside)
+      triggerWhatsAppPrompt(); // This will hide current AI prompt and show WhatsApp prompt
+    } else if (open && !showAIPrompt) { // If popover is opened by trigger click
+      setShowAIPrompt(true);
+    } else { // Standard close (e.g., AI button click already called triggerWhatsAppPrompt)
+       setShowAIPrompt(open);
+    }
+  };
+
+  const handleWhatsAppButtonClick = () => {
+    if (whatsAppPromptTimeoutRef.current) {
+      clearTimeout(whatsAppPromptTimeoutRef.current);
+      whatsAppPromptTimeoutRef.current = null;
+    }
+    setShowWhatsAppPrompt(false);
+    // The actual navigation is handled by the <a> tag for WhatsApp
+  };
+
+  const handleWhatsAppPopoverOpenChange = (open: boolean) => {
+    // If WhatsApp popover is closed by user (e.g. click outside)
+    if (!open && showWhatsAppPrompt && whatsAppPromptTimeoutRef.current) { 
+       clearTimeout(whatsAppPromptTimeoutRef.current);
+       whatsAppPromptTimeoutRef.current = null;
+    }
+    setShowWhatsAppPrompt(open);
+  };
 
   return (
     <>
       <div className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
-        <Popover open={showAIPrompt} onOpenChange={setShowAIPrompt}>
+        <Popover open={showAIPrompt} onOpenChange={handleAIPopoverOpenChange}>
           <PopoverTrigger asChild>
              <Button
                 variant="default"
@@ -85,28 +147,40 @@ export function FloatingActionButtons() {
           <PopoverContent 
             side="left" 
             className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2"
-            onOpenAutoFocus={(e) => e.preventDefault()} // Prevents focus stealing
+            onOpenAutoFocus={(e) => e.preventDefault()}
           >
             <p className="text-sm font-medium">Try the AI Business Assistant!</p>
           </PopoverContent>
         </Popover>
         
-        <Button
-          asChild
-          variant="default"
-          size="icon"
-          className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent hover:bg-accent/90 text-accent-foreground"
-          aria-label="Contact us on WhatsApp"
-          title="Contact on WhatsApp"
-        >
-          <a
-            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
-            target="_blank"
-            rel="noopener noreferrer"
+        <Popover open={showWhatsAppPrompt} onOpenChange={handleWhatsAppPopoverOpenChange}>
+          <PopoverTrigger asChild>
+            <Button
+              asChild
+              variant="default"
+              size="icon"
+              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent hover:bg-accent/90 text-accent-foreground"
+              aria-label="Contact us on WhatsApp"
+              title="Contact on WhatsApp"
+              onClick={handleWhatsAppButtonClick} // Added to manage popover on direct click
+            >
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <WhatsAppIcon className="h-7 w-7" />
+              </a>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent
+            side="left"
+            className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2"
+            onOpenAutoFocus={(e) => e.preventDefault()}
           >
-            <WhatsAppIcon className="h-7 w-7" />
-          </a>
-        </Button>
+            <p className="text-sm font-medium">Talk to one of our consultants!</p>
+          </PopoverContent>
+        </Popover>
       </div>
     </>
   );
