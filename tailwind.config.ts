@@ -91,7 +91,7 @@ export default {
         },
         'zoomInOut': {
           '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.03)' }, // Slightly less aggressive zoom
+          '50%': { transform: 'scale(1.03)' },
         },
         'attention-bounce': {
           '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: 1 },
@@ -101,13 +101,18 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
         },
+        'radial-accent-intro': {
+          '0%': { '--current-accent-stop': '0%' },
+          '100%': { '--current-accent-stop': '1%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'zoom-in-out': 'zoomInOut 12s ease-in-out infinite', // Longer duration for a smoother effect
+        'zoom-in-out': 'zoomInOut 12s ease-in-out infinite',
         'attention-bounce': 'attention-bounce 2s ease-in-out infinite',
         'blink': 'blink 1s step-end infinite',
+        'radial-accent-intro': 'radial-accent-intro 1.5s ease-out forwards',
       },
     },
   },
