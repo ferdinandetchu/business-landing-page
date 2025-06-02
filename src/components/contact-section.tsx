@@ -82,7 +82,7 @@ export function ContactSection() {
   return (
     <section 
       id="contact" 
-      className="py-16 sm:py-24 bg-radial-primary-accent animate-radial-accent-intro" 
+      className="py-16 sm:py-24 bg-primary" 
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -112,7 +112,7 @@ export function ContactSection() {
                             <Input 
                               placeholder="John Doe" 
                               {...field} 
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent" 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus:border-accent focus:border-2" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -130,7 +130,7 @@ export function ContactSection() {
                               type="email" 
                               placeholder="you@example.com" 
                               {...field} 
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent" 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus:border-accent focus:border-2" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -147,7 +147,7 @@ export function ContactSection() {
                             <Input 
                               placeholder="e.g., Data Analysis" 
                               {...field} 
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent" 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus:border-accent focus:border-2" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -165,7 +165,7 @@ export function ContactSection() {
                               placeholder="Tell us about your project or inquiry..."
                               rows={5}
                               {...field}
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent"
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus:border-accent focus:border-2"
                             />
                           </FormControl>
                           <FormMessage />
