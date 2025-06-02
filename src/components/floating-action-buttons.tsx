@@ -31,25 +31,17 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export function FloatingActionButtons() {
   const whatsappNumber = "237671097299"; 
   const [showAIPrompt, setShowAIPrompt] = useState(false);
-  const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
-
+  
   const aiPromptDisplayDuration = 10000; 
-  const whatsAppPromptDisplayDuration = 120000; 
-
   const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const triggerWhatsAppPrompt = useCallback(() => {
+  const hideAIPromptAndClearTimeout = useCallback(() => {
     if (aiPromptTimeoutRef.current) {
       clearTimeout(aiPromptTimeoutRef.current);
       aiPromptTimeoutRef.current = null;
     }
     setShowAIPrompt(false);
-    
-    if (!showWhatsAppPrompt && !whatsAppPromptTimeoutRef.current) { 
-        setShowWhatsAppPrompt(true);
-    }
-  }, [showWhatsAppPrompt]); 
+  }, []); 
 
   // Effect to show the AI popover initially
   useEffect(() => {
@@ -59,10 +51,10 @@ export function FloatingActionButtons() {
     return () => clearTimeout(initialShowTimer);
   }, []);
 
-  // Effect for AI Popover: Auto-hide and trigger WhatsApp Popover
+  // Effect for AI Popover: Auto-hide
   useEffect(() => {
     if (showAIPrompt) {
-      aiPromptTimeoutRef.current = setTimeout(triggerWhatsAppPrompt, aiPromptDisplayDuration);
+      aiPromptTimeoutRef.current = setTimeout(hideAIPromptAndClearTimeout, aiPromptDisplayDuration);
     }
     return () => {
       if (aiPromptTimeoutRef.current) {
@@ -70,59 +62,33 @@ export function FloatingActionButtons() {
         aiPromptTimeoutRef.current = null;
       }
     };
-  }, [showAIPrompt, triggerWhatsAppPrompt, aiPromptDisplayDuration]);
+  }, [showAIPrompt, hideAIPromptAndClearTimeout, aiPromptDisplayDuration]);
 
-  // Effect to auto-hide WhatsApp popover
-  useEffect(() => {
-    if (showWhatsAppPrompt) {
-      whatsAppPromptTimeoutRef.current = setTimeout(() => {
-        setShowWhatsAppPrompt(false);
-      }, whatsAppPromptDisplayDuration);
-    }
-    return () => {
-      if (whatsAppPromptTimeoutRef.current) {
-        clearTimeout(whatsAppPromptTimeoutRef.current);
-        whatsAppPromptTimeoutRef.current = null;
-      }
-    };
-  }, [showWhatsAppPrompt, whatsAppPromptDisplayDuration]);
 
   const handleAIButtonClick = () => {
-    triggerWhatsAppPrompt(); 
+    hideAIPromptAndClearTimeout(); 
     const advisorSection = document.getElementById('advisor');
     if (advisorSection) {
       advisorSection.scrollIntoView({ behavior: 'smooth' });
     } else {
+      // Fallback if the section isn't found, e.g. if it's on another page
       window.location.hash = '#advisor'; 
     }
   };
   
   const handleAIPopoverOpenChange = (open: boolean) => {
     if (!open && showAIPrompt) { 
-      triggerWhatsAppPrompt(); 
+      hideAIPromptAndClearTimeout(); 
     } else if (open && !showAIPrompt) { 
+      // If user reopens it manually, clear any auto-hide timer
       if(aiPromptTimeoutRef.current) clearTimeout(aiPromptTimeoutRef.current);
       setShowAIPrompt(true);
     } else { 
+       // Sync state if popover is controlled by other means (e.g. clicking outside)
        setShowAIPrompt(open);
     }
   };
 
-  const handleWhatsAppButtonClick = () => {
-    if (whatsAppPromptTimeoutRef.current) {
-      clearTimeout(whatsAppPromptTimeoutRef.current);
-      whatsAppPromptTimeoutRef.current = null;
-    }
-    setShowWhatsAppPrompt(false);
-  };
-
-  const handleWhatsAppPopoverOpenChange = (open: boolean) => {
-    if (!open && showWhatsAppPrompt && whatsAppPromptTimeoutRef.current) { 
-       clearTimeout(whatsAppPromptTimeoutRef.current);
-       whatsAppPromptTimeoutRef.current = null;
-    }
-    setShowWhatsAppPrompt(open);
-  };
 
   return (
     <>
@@ -143,41 +109,28 @@ export function FloatingActionButtons() {
           <PopoverContent 
             side="left" 
             className="w-auto p-2 bg-background text-foreground border border-primary shadow-lg mr-2"
-            onOpenAutoFocus={(e) => e.preventDefault()}
+            onOpenAutoFocus={(e) => e.preventDefault()} // Prevents focus stealing on auto-show
           >
             <p className="text-sm font-medium">Try the AI Business Assistant!</p>
           </PopoverContent>
         </Popover>
         
-        <Popover open={showWhatsAppPrompt} onOpenChange={handleWhatsAppPopoverOpenChange}>
-          <PopoverTrigger asChild>
-            <Button
-              asChild
-              size="icon"
-              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent text-accent-foreground hover:bg-[#25D366] hover:text-white"
-              aria-label="Contact us on WhatsApp"
-              title="Contact on WhatsApp"
-              onClick={handleWhatsAppButtonClick} 
-            >
-              <a
-                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <WhatsAppIcon className="h-7 w-7" />
-              </a>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            side="left"
-            className="w-auto p-2 bg-background text-foreground border border-accent shadow-lg mr-2"
-            onOpenAutoFocus={(e) => e.preventDefault()}
+        <Button
+          asChild
+          size="icon"
+          className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent text-accent-foreground hover:bg-[#25D366] hover:text-white"
+          aria-label="Contact us on WhatsApp"
+          title="Contact on WhatsApp"
+        >
+          <a
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <p className="text-sm font-medium">Talk to one of our consultants!</p>
-          </PopoverContent>
-        </Popover>
+            <WhatsAppIcon className="h-7 w-7" />
+          </a>
+        </Button>
       </div>
     </>
   );
 }
-
