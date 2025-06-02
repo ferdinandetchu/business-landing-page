@@ -16,8 +16,8 @@ const catchyPhrases = [
 
 const staticHeroDescription = "Expert Solutions for Complex Challenges. We specialize in scientific research rewriting, data analysis, business consulting, and project management.";
 
-const TYPING_SPEED = 100; // Milliseconds per character
-const DELETING_SPEED = 70; // Milliseconds per character
+const TYPING_SPEED = 50; // Milliseconds per character
+const DELETING_SPEED = 35; // Milliseconds per character
 const PAUSE_DURATION = 2000; // Milliseconds to pause after typing, before deleting
 
 export function HeroSection() {
@@ -80,7 +80,7 @@ export function HeroSection() {
       <div className="relative flex-grow flex flex-col justify-center items-center z-10 pt-14"> {/* Added pt-14 to offset navbar height */}
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h1
-            className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl min-h-[1.2em]" // min-h to prevent collapse, adjust as needed
+            className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
           >
             {displayedText || <>&nbsp;</>}
             <span className="animate-blink text-accent ml-1">|</span>
