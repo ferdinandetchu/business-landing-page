@@ -12,6 +12,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import { InteractiveGradientBackground } from '@/components/interactive-gradient-background';
 
 export function TestimonialsSection() {
   const clientLogos = [
@@ -23,7 +24,11 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonials" className="py-16 sm:py-24 bg-primary">
+    <InteractiveGradientBackground
+      as="section"
+      id="testimonials"
+      className="py-16 sm:py-24 bg-primary"
+    >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">What Our Clients Say</h2>
@@ -67,7 +72,7 @@ export function TestimonialsSection() {
           <CarouselNext className="hidden sm:flex" />
         </Carousel>
 
-        <div className="mt-16 pt-12 border-t border-primary-foreground/20"> {/* Adjusted border color for contrast */}
+        <div className="mt-16 pt-12 border-t border-primary-foreground/20">
           <h3 className="font-headline text-2xl font-semibold text-primary-foreground text-center mb-8">
             Trusted By Leading Organizations
           </h3>
@@ -101,6 +106,6 @@ export function TestimonialsSection() {
             </Card>
         </div>
       </div>
-    </section>
+    </InteractiveGradientBackground>
   );
 }
