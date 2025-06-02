@@ -51,11 +51,11 @@ const AnimatedTestimonialWrapper = ({ children, index }: { children: React.React
 
 export function TestimonialsSection() {
   const clientLogos = [
-    { id: 'logo1', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 1', dataAiHint: 'company logo' },
-    { id: 'logo2', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 2', dataAiHint: 'tech company' },
-    { id: 'logo3', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 3', dataAiHint: 'finance logo' },
-    { id: 'logo4', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 4', dataAiHint: 'startup logo' },
-    { id: 'logo5', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 5', dataAiHint: 'global firm' },
+    { id: 'logo1', src: '/app/apex.jpg', alt: 'Client Logo 1', dataAiHint: 'company logo' },
+    { id: 'logo2', src: '/apex.jpg', alt: 'Client Logo 2', dataAiHint: 'tech company' },
+    { id: 'logo3', src: '/apex.jpg', alt: 'Client Logo 3', dataAiHint: 'finance logo' },
+    { id: 'logo4', src: '/apex.jpg', alt: 'Client Logo 4', dataAiHint: 'startup logo' },
+    { id: 'logo5', src: '/apex.jpg', alt: 'Client Logo 5', dataAiHint: 'global firm' },
   ];
 
   const duplicatedClientLogos = [...clientLogos, ...clientLogos];
