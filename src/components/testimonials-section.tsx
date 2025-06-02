@@ -1,10 +1,20 @@
+
 import { testimonials, type Testimonial } from '@/data/testimonials';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Quote, Star } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import Image from 'next/image';
 
 export function TestimonialsSection() {
+  const clientLogos = [
+    { id: 'logo1', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 1', dataAiHint: 'company logo' },
+    { id: 'logo2', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 2', dataAiHint: 'tech company' },
+    { id: 'logo3', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 3', dataAiHint: 'finance logo' },
+    { id: 'logo4', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 4', dataAiHint: 'startup logo' },
+    { id: 'logo5', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 5', dataAiHint: 'global firm' },
+  ];
+
   return (
     <section id="testimonials" className="py-16 sm:py-24 bg-secondary/50">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -36,6 +46,25 @@ export function TestimonialsSection() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-16 pt-12 border-t border-border/40">
+          <h3 className="font-headline text-2xl font-semibold text-primary text-center mb-8">
+            Trusted By Leading Organizations
+          </h3>
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
+            {clientLogos.map(logo => (
+              <div key={logo.id} className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 transition-opacity duration-300">
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  layout="fill"
+                  objectFit="contain"
+                  data-ai-hint={logo.dataAiHint}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-16 text-center">
