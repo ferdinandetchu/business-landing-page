@@ -113,6 +113,10 @@ export default {
           '0%, 100%': { opacity: '0.6' },
           '50%': { opacity: '1' },
         },
+        'marquee-rtl': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -122,8 +126,21 @@ export default {
         'blink': 'blink 1s step-end infinite',
         'radial-accent-intro': 'radial-accent-intro 1.5s ease-out forwards',
         'bg-circles-pulse': 'bg-circles-pulse 3s ease-in-out infinite alternate',
+        'marquee-rtl': 'marquee-rtl 30s linear infinite',
       },
+      animationPlayState: { // For pausing animation on hover
+        'paused': 'paused',
+      }
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addUtilities }) {
+      addUtilities({
+        '.pause-animation': {
+          'animation-play-state': 'paused',
+        },
+      })
+    }
+  ],
 } satisfies Config;

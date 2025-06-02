@@ -49,21 +49,6 @@ const AnimatedTestimonialWrapper = ({ children, index }: { children: React.React
   );
 };
 
-const AnimatedClientLogo = ({ children, index }: { children: React.ReactNode; index: number }) => {
-  const { ref, isInView } = useScrollAnimation({ threshold: 0.1, staggerDelay: 100, index });
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "transition-all duration-700 ease-out transform",
-        isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10' // Slide from right
-      )}
-    >
-      {children}
-    </div>
-  );
-};
-
 export function TestimonialsSection() {
   const clientLogos = [
     { id: 'logo1', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 1', dataAiHint: 'company logo' },
@@ -72,6 +57,9 @@ export function TestimonialsSection() {
     { id: 'logo4', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 4', dataAiHint: 'startup logo' },
     { id: 'logo5', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 5', dataAiHint: 'global firm' },
   ];
+
+  const duplicatedClientLogos = [...clientLogos, ...clientLogos];
+
 
   return (
     <InteractiveGradientBackground
@@ -129,20 +117,22 @@ export function TestimonialsSection() {
           <h3 className="font-headline text-2xl font-semibold text-primary-foreground text-center mb-8">
             Trusted By Leading Organizations
           </h3>
-          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
-            {clientLogos.map((logo, index) => (
-              <AnimatedClientLogo key={logo.id} index={index}>
-                <div className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    layout="fill"
-                    objectFit="contain"
-                    data-ai-hint={logo.dataAiHint}
-                  />
+          <div className="w-full overflow-hidden group">
+            <div className="flex animate-marquee-rtl group-hover:pause-animation whitespace-nowrap py-4">
+              {duplicatedClientLogos.map((logo, index) => (
+                <div key={`${logo.id}-${index}`} className="mx-6 shrink-0">
+                  <div className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      layout="fill"
+                      objectFit="contain"
+                      data-ai-hint={logo.dataAiHint}
+                    />
+                  </div>
                 </div>
-              </AnimatedClientLogo>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
