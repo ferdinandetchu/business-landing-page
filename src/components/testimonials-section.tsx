@@ -49,6 +49,21 @@ const AnimatedTestimonialWrapper = ({ children, index }: { children: React.React
   );
 };
 
+const AnimatedClientLogo = ({ children, index }: { children: React.ReactNode; index: number }) => {
+  const { ref, isInView } = useScrollAnimation({ threshold: 0.1, staggerDelay: 100, index });
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out transform",
+        isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10' // Slide from right
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
 export function TestimonialsSection() {
   const clientLogos = [
     { id: 'logo1', src: 'https://placehold.co/150x60.png', alt: 'Client Logo 1', dataAiHint: 'company logo' },
@@ -115,16 +130,18 @@ export function TestimonialsSection() {
             Trusted By Leading Organizations
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
-            {clientLogos.map(logo => (
-              <div key={logo.id} className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 transition-opacity duration-300">
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  layout="fill"
-                  objectFit="contain"
-                  data-ai-hint={logo.dataAiHint}
-                />
-              </div>
+            {clientLogos.map((logo, index) => (
+              <AnimatedClientLogo key={logo.id} index={index}>
+                <div className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    layout="fill"
+                    objectFit="contain"
+                    data-ai-hint={logo.dataAiHint}
+                  />
+                </div>
+              </AnimatedClientLogo>
             ))}
           </div>
         </div>
