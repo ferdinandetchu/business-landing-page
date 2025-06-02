@@ -34,7 +34,7 @@ export function FloatingActionButtons() {
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
 
   const aiPromptDisplayDuration = 10000; // 10 seconds
-  const whatsAppPromptDisplayDuration = 10000; // 10 seconds
+  const whatsAppPromptDisplayDuration = 15000; // Changed to 15 seconds
 
   const aiPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const whatsAppPromptTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -46,8 +46,6 @@ export function FloatingActionButtons() {
     }
     setShowAIPrompt(false);
     
-    // Only show WhatsApp prompt if it's not already active or scheduled to be active
-    // This check helps prevent re-triggering if multiple events try to show it.
     if (!showWhatsAppPrompt && !whatsAppPromptTimeoutRef.current) { 
         setShowWhatsAppPrompt(true);
     }
@@ -90,22 +88,21 @@ export function FloatingActionButtons() {
   }, [showWhatsAppPrompt]);
 
   const handleAIButtonClick = () => {
-    triggerWhatsAppPrompt(); // This will hide AI prompt and show WhatsApp prompt
-    // Smooth scroll to section
+    triggerWhatsAppPrompt(); 
     const advisorSection = document.getElementById('advisor');
     if (advisorSection) {
       advisorSection.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.hash = '#advisor'; // Fallback
+      window.location.hash = '#advisor'; 
     }
   };
   
   const handleAIPopoverOpenChange = (open: boolean) => {
-    if (!open && showAIPrompt) { // If AI popover is closed by user (e.g. click outside)
-      triggerWhatsAppPrompt(); // This will hide current AI prompt and show WhatsApp prompt
-    } else if (open && !showAIPrompt) { // If popover is opened by trigger click
+    if (!open && showAIPrompt) { 
+      triggerWhatsAppPrompt(); 
+    } else if (open && !showAIPrompt) { 
       setShowAIPrompt(true);
-    } else { // Standard close (e.g., AI button click already called triggerWhatsAppPrompt)
+    } else { 
        setShowAIPrompt(open);
     }
   };
@@ -116,11 +113,9 @@ export function FloatingActionButtons() {
       whatsAppPromptTimeoutRef.current = null;
     }
     setShowWhatsAppPrompt(false);
-    // The actual navigation is handled by the <a> tag for WhatsApp
   };
 
   const handleWhatsAppPopoverOpenChange = (open: boolean) => {
-    // If WhatsApp popover is closed by user (e.g. click outside)
     if (!open && showWhatsAppPrompt && whatsAppPromptTimeoutRef.current) { 
        clearTimeout(whatsAppPromptTimeoutRef.current);
        whatsAppPromptTimeoutRef.current = null;
@@ -159,10 +154,10 @@ export function FloatingActionButtons() {
               asChild
               variant="default"
               size="icon"
-              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-accent hover:bg-accent/90 text-accent-foreground"
+              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-green-500 hover:bg-green-600 text-white"
               aria-label="Contact us on WhatsApp"
               title="Contact on WhatsApp"
-              onClick={handleWhatsAppButtonClick} // Added to manage popover on direct click
+              onClick={handleWhatsAppButtonClick} 
             >
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to inquire about your services.")}`}
@@ -175,7 +170,7 @@ export function FloatingActionButtons() {
           </PopoverTrigger>
           <PopoverContent
             side="left"
-            className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2"
+            className="w-auto p-2 bg-accent text-accent-foreground border-accent shadow-lg mr-2"
             onOpenAutoFocus={(e) => e.preventDefault()}
           >
             <p className="text-sm font-medium">Talk to one of our consultants!</p>
