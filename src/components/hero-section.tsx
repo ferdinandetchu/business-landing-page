@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { Navbar } from '@/components/layout/navbar'; // Import Navbar
 
 export function HeroSection() {
   return (
@@ -9,6 +10,7 @@ export function HeroSection() {
       id="hero" 
       className="relative w-full min-h-screen flex flex-col justify-center items-center"
     >
+      <Navbar /> {/* Render Navbar here */}
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
@@ -39,10 +41,6 @@ export function HeroSection() {
           </Button>
         </div>
       </div>
-
-      {/* Gradient fade to transition smoothly to the next section, only if not full screen or if there's content below */}
-      {/* This might not be needed if the hero section is always full screen and the next section starts immediately after */}
-      {/* <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-background to-transparent z-5" /> */}
     </section>
   );
 }
