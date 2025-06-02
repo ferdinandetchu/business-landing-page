@@ -6,11 +6,12 @@ import { PhilosophySection } from '@/components/philosophy-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { BusinessAdvisorTool } from '@/components/business-advisor-tool';
 import { ContactSection } from '@/components/contact-section';
+import { Navbar } from '@/components/layout/navbar'; // Import Navbar
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Navbar is now rendered inside HeroSection */}
+      <Navbar /> {/* Navbar is rendered here, outside and before HeroSection */}
       <main className="flex-grow">
         <HeroSection />
         <ServicesSection />

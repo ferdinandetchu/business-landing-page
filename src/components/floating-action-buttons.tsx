@@ -7,15 +7,10 @@ import { Brain } from 'lucide-react';
 import type React from 'react';
 import { useState, useEffect } from 'react';
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 // SVG Icon for WhatsApp
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -36,42 +31,55 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function FloatingActionButtons() {
   const whatsappNumber = "12345678900"; 
-  const [showAssistantDialog, setShowAssistantDialog] = useState(false);
+  const [showAIPrompt, setShowAIPrompt] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowAssistantDialog(true);
+      setShowAIPrompt(true);
     }, 5000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
 
-  const handleTryAssistant = () => {
-    setShowAssistantDialog(false);
+  // If user clicks the AI button, hide the prompt popover
+  const handleAIButtonClick = () => {
+    setShowAIPrompt(false);
+    // Smooth scroll to section
     const advisorSection = document.getElementById('advisor');
     if (advisorSection) {
       advisorSection.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // Fallback if the section isn't found
-      window.location.hash = '#advisor';
+      window.location.hash = '#advisor'; // Fallback
     }
   };
 
   return (
     <>
       <div className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
-        <Button
-          asChild
-          variant="default"
-          size="icon"
-          className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow animate-attention-bounce"
-          aria-label="Try AI Business Assistant"
-          title="Try AI Business Assistant"
-        >
-          <Link href="#advisor">
-            <Brain className="h-7 w-7" />
-          </Link>
-        </Button>
+        <Popover open={showAIPrompt} onOpenChange={setShowAIPrompt}>
+          <PopoverTrigger asChild>
+            {/* The Button component itself will act as the trigger */}
+            {/* We need a dummy trigger if the actual button click is handled separately */}
+            {/* Or, wrap the Button and handle click on PopoverTrigger or Button */}
+             <Button
+                variant="default"
+                size="icon"
+                className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow animate-attention-bounce"
+                aria-label="Try AI Business Assistant"
+                title="Try AI Business Assistant"
+                onClick={handleAIButtonClick} 
+                // Note: PopoverTrigger typically wraps the button. Here, button is the trigger.
+                // If Popover open is controlled, clicking the button might toggle it.
+                // We want to navigate, so explicit click handler is better.
+              >
+                <Brain className="h-7 w-7" />
+              </Button>
+          </PopoverTrigger>
+          <PopoverContent side="left" className="w-auto p-2 bg-accent text-accent-foreground border-accent shadow-lg mr-2">
+            <p className="text-sm font-medium">Try the AI Business Assistant!</p>
+          </PopoverContent>
+        </Popover>
+        
         <Button
           asChild
           variant="default"
@@ -89,24 +97,7 @@ export function FloatingActionButtons() {
           </a>
         </Button>
       </div>
-
-      <AlertDialog open={showAssistantDialog} onOpenChange={setShowAssistantDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Try Our AI Business Assistant!</AlertDialogTitle>
-            <AlertDialogDescription>
-              Get instant insights and strategic advice for your business challenges. 
-              Our AI assistant is ready to help you find solutions and plan your next steps.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setShowAssistantDialog(false)}>Maybe Later</AlertDialogCancel>
-            <AlertDialogAction onClick={handleTryAssistant}>
-              Try it Now
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 }
+

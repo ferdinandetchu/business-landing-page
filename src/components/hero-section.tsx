@@ -2,16 +2,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { Navbar } from '@/components/layout/navbar'; // Import Navbar
+// Navbar import is removed
 
 export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col overflow-visible" // Added overflow-visible
+      className="relative w-full min-h-screen flex flex-col overflow-visible"
     >
-      <Navbar /> {/* Render Navbar here, it will stick to the top */}
-
       {/* Background Image and Overlay - covers the entire section */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
