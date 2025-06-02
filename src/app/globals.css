@@ -124,6 +124,6 @@ body {
   }
 
   .bg-radial-primary-accent {
-    background-image: radial-gradient(ellipse at center, hsl(var(--primary)) 20%, hsl(var(--accent)) 100%);
+    background-image: radial-gradient(ellipse at center, hsl(var(--accent)) 20%, hsl(var(--primary)) 100%);
   }
 }
