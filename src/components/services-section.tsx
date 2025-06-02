@@ -14,7 +14,7 @@ export function ServicesSection() {
             Empowering you with tailored solutions to meet your unique needs. Hover over a service to see more details.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 items-start">
           {services.map((service) => (
             <Card 
               key={service.id} 
@@ -34,7 +34,7 @@ export function ServicesSection() {
                   </ul>
                 )}
               </CardContent>
-              <div className="p-6 pt-0 mt-auto"> {/* Added mt-auto to push button to the bottom */}
+              <div className="p-6 pt-0 mt-auto">
                 <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                   <Link href={`#contact?service=${encodeURIComponent(service.name)}`}>Request This Service</Link>
                 </Button>
