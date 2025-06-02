@@ -5,16 +5,20 @@ import Image from 'next/image';
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative w-full py-20 md:py-32 lg:py-40">
+    <section 
+      id="hero" 
+      className="relative w-full min-h-screen flex flex-col justify-center items-center"
+    >
       {/* Background Image and Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1560185127-6ed189bf0249"
+          src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Modern dining room with wooden table and chairs, minimalist decor"
           layout="fill"
           objectFit="cover"
-          className="filter blur-sm"
+          className="filter blur-sm animate-zoom-in-out"
           priority
+          data-ai-hint="modern dining room"
         />
         <div className="absolute inset-0 bg-black/50"></div> {/* Overlay for text readability */}
       </div>
@@ -36,8 +40,9 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Gradient fade to transition smoothly to the next section */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-background to-transparent z-5" />
+      {/* Gradient fade to transition smoothly to the next section, only if not full screen or if there's content below */}
+      {/* This might not be needed if the hero section is always full screen and the next section starts immediately after */}
+      {/* <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-background to-transparent z-5" /> */}
     </section>
   );
 }
