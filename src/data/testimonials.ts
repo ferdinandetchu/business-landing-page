@@ -15,7 +15,7 @@ export const testimonials: Testimonial[] = [
     clientName: 'Dr. Eleanor Vance',
     clientRole: 'Lead Researcher',
     company: 'Innovatech Labs',
-    avatarUrl: 'https://placehold.co/100x100.png',
+    avatarUrl: 'https://images.unsplash.com/photo-1703059680709-d9554370fff9?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     dataAiHint: 'scientist woman',
   },
   {
@@ -24,7 +24,7 @@ export const testimonials: Testimonial[] = [
     clientName: 'Marcus Chen',
     clientRole: 'CEO',
     company: 'Apex Industries',
-    avatarUrl: 'https://placehold.co/100x100.png',
+    avatarUrl: 'https://images.unsplash.com/photo-1675383094481-3e2088da943b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     dataAiHint: 'businessman portrait',
   },
   {
@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     clientName: 'Aisha Khan',
     clientRole: 'Director',
     company: 'Global Outreach Foundation',
-    avatarUrl: 'https://placehold.co/100x100.png',
+    avatarUrl: 'https://images.unsplash.com/photo-1604783020105-a1c1a856a55d?q=80&w=2010&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     dataAiHint: 'charity worker',
   },
 ];
