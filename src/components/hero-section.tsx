@@ -2,13 +2,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-// Navbar import is removed
 
 export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col overflow-visible"
+      className="relative w-full min-h-screen flex flex-col overflow-visible -mt-14"
     >
       {/* Background Image and Overlay - covers the entire section */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -25,7 +24,7 @@ export function HeroSection() {
       </div>
 
       {/* Container for the hero text content, centered in the remaining space */}
-      <div className="relative flex-grow flex flex-col justify-center items-center z-10">
+      <div className="relative flex-grow flex flex-col justify-center items-center z-10 pt-14"> {/* Added pt-14 to offset navbar height */}
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             FYCARD Consulting and Outsourcing

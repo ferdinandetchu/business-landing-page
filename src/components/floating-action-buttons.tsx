@@ -58,9 +58,6 @@ export function FloatingActionButtons() {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
         <Popover open={showAIPrompt} onOpenChange={setShowAIPrompt}>
           <PopoverTrigger asChild>
-            {/* The Button component itself will act as the trigger */}
-            {/* We need a dummy trigger if the actual button click is handled separately */}
-            {/* Or, wrap the Button and handle click on PopoverTrigger or Button */}
              <Button
                 variant="default"
                 size="icon"
@@ -68,14 +65,11 @@ export function FloatingActionButtons() {
                 aria-label="Try AI Business Assistant"
                 title="Try AI Business Assistant"
                 onClick={handleAIButtonClick} 
-                // Note: PopoverTrigger typically wraps the button. Here, button is the trigger.
-                // If Popover open is controlled, clicking the button might toggle it.
-                // We want to navigate, so explicit click handler is better.
               >
                 <Brain className="h-7 w-7" />
               </Button>
           </PopoverTrigger>
-          <PopoverContent side="left" className="w-auto p-2 bg-accent text-accent-foreground border-accent shadow-lg mr-2">
+          <PopoverContent side="left" className="w-auto p-2 bg-primary text-primary-foreground border-primary shadow-lg mr-2">
             <p className="text-sm font-medium">Try the AI Business Assistant!</p>
           </PopoverContent>
         </Popover>
@@ -100,4 +94,3 @@ export function FloatingActionButtons() {
     </>
   );
 }
-
