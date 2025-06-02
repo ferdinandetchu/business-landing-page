@@ -109,9 +109,13 @@ export default {
           '0%': { '--current-accent-stop': '0%' },
           '100%': { '--current-accent-stop': '1%' },
         },
-        'bg-circles-drift': {
-          '0%': { 'background-position': '0% 0%' },
-          '100%': { 'background-position': '100% 100%' },
+        'bg-circles-drift-x': {
+          '0%': { 'background-position-x': '0%' },
+          '100%': { 'background-position-x': '100%' },
+        },
+        'bg-circles-drift-y': {
+          '0%': { 'background-position-y': '0%' },
+          '100%': { 'background-position-y': '100%' },
         },
       },
       animation: {
@@ -121,7 +125,8 @@ export default {
         'attention-bounce': 'attention-bounce 2s ease-in-out infinite',
         'blink': 'blink 1s step-end infinite',
         'radial-accent-intro': 'radial-accent-intro 1.5s ease-out forwards',
-        'bg-circles-drift': 'bg-circles-drift 60s linear infinite alternate',
+        'bg-circles-drift-x': 'bg-circles-drift-x 60s linear infinite alternate',
+        'bg-circles-drift-y': 'bg-circles-drift-y 73s linear infinite alternate',
       },
     },
   },
