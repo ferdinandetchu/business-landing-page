@@ -17,7 +17,7 @@ export function Navbar() {
       <div className="container flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"> {/* h-16 to h-14 */}
         <Link href="/" className="flex items-center gap-2">
           <Target className="h-7 w-7 text-primary" />
-          <span className="font-headline text-xl font-semibold text-primary">FYCARD Consulting and Outsourcing</span>
+          <span className="font-headline text-lg font-semibold text-primary">FYCARD Consulting and Outsourcing</span>
         </Link>
         
         <nav className="hidden md:flex items-center gap-6 text-sm">
