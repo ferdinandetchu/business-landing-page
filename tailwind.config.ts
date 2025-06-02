@@ -93,11 +93,16 @@ export default {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.03)' }, // Slightly less aggressive zoom
         },
+        'attention-bounce': {
+          '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: 1 },
+          '50%': { transform: 'translateY(-6px) scale(1.05)', opacity: 0.9 },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'zoom-in-out': 'zoomInOut 12s ease-in-out infinite', // Longer duration for a smoother effect
+        'attention-bounce': 'attention-bounce 2s ease-in-out infinite',
       },
     },
   },

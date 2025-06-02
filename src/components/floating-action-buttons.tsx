@@ -33,9 +33,9 @@ export function FloatingActionButtons() {
         asChild
         variant="default"
         size="icon"
-        className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow"
-        aria-label="Open AI Advisor"
-        title="AI Advisor"
+        className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow animate-attention-bounce"
+        aria-label="Try AI Business Assistant"
+        title="Try AI Business Assistant"
       >
         <Link href="#advisor">
           <Brain className="h-7 w-7" />
