@@ -120,8 +120,8 @@ export function TestimonialsSection() {
           <div className="w-full overflow-hidden group">
             <div className="flex animate-marquee-rtl group-hover:pause-animation whitespace-nowrap py-4">
               {duplicatedClientLogos.map((logo, index) => (
-                <div key={`${logo.id}-${index}`} className="mx-4 shrink-0">
-                  <div className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                <div key={`${logo.id}-${index}`} className="mx-3 shrink-0">
+                  <div className="relative h-12 w-36 filter grayscale opacity-75 hover:opacity-100 hover:grayscale-0 transition-all duration-300 rounded-md overflow-hidden">
                     <Image
                       src={logo.src}
                       alt={logo.alt}
