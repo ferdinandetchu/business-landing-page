@@ -109,6 +109,10 @@ export default {
           '0%': { '--current-accent-stop': '0%' },
           '100%': { '--current-accent-stop': '1%' },
         },
+        'bg-circles-drift': {
+          '0%': { 'background-position': '0% 0%' },
+          '100%': { 'background-position': '100% 100%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -117,6 +121,7 @@ export default {
         'attention-bounce': 'attention-bounce 2s ease-in-out infinite',
         'blink': 'blink 1s step-end infinite',
         'radial-accent-intro': 'radial-accent-intro 1.5s ease-out forwards',
+        'bg-circles-drift': 'bg-circles-drift 60s linear infinite alternate',
       },
     },
   },
