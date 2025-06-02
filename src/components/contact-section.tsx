@@ -112,7 +112,7 @@ export function ContactSection() {
                             <Input 
                               placeholder="John Doe" 
                               {...field} 
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30" 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -130,7 +130,7 @@ export function ContactSection() {
                               type="email" 
                               placeholder="you@example.com" 
                               {...field} 
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30" 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -147,7 +147,7 @@ export function ContactSection() {
                             <Input 
                               placeholder="e.g., Data Analysis" 
                               {...field} 
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30" 
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -165,7 +165,7 @@ export function ContactSection() {
                               placeholder="Tell us about your project or inquiry..."
                               rows={5}
                               {...field}
-                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30"
+                              className="shadow-sm bg-input-on-primary text-input-on-primary-foreground placeholder:text-[hsla(var(--input-on-primary-foreground-hsl),0.7)] border-primary-foreground/30 focus-visible:ring-accent"
                             />
                           </FormControl>
                           <FormMessage />
