@@ -182,8 +182,8 @@ body {
     background-repeat: no-repeat;
     background-size: 300% 300%; /* Increased to allow for more movement */
     animation:
-      bg-circles-drift-x 30s linear infinite alternate, /* Faster X drift */
-      bg-circles-drift-y 37s linear infinite alternate; /* Faster Y drift */
+      bg-circles-drift-x 15s linear infinite alternate, /* Faster X drift */
+      bg-circles-drift-y 19s linear infinite alternate; /* Faster Y drift */
     background-position-x: 0%;
     background-position-y: 0%;
     pointer-events: none;
@@ -196,3 +196,4 @@ body {
     z-index: 1;
   }
 }
+
