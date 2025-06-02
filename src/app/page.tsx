@@ -1,9 +1,10 @@
+
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { HeroSection } from '@/components/hero-section';
 import { ServicesSection } from '@/components/services-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
-import { AiTestimonialEnhancer } from '@/components/ai-testimonial-enhancer';
+import { BusinessAdvisorTool } from '@/components/business-advisor-tool';
 import { ContactSection } from '@/components/contact-section';
 
 export default function HomePage() {
@@ -14,7 +15,7 @@ export default function HomePage() {
         <HeroSection />
         <ServicesSection />
         <TestimonialsSection />
-        <AiTestimonialEnhancer />
+        <BusinessAdvisorTool />
         <ContactSection />
       </main>
       <Footer />
