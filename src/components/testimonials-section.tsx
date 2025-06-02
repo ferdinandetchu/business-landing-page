@@ -1,10 +1,17 @@
 
-import { testimonials, type Testimonial } from '@/data/testimonials';
+import { testimonials } from '@/data/testimonials';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Quote, Star } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import Image from 'next/image';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 export function TestimonialsSection() {
   const clientLogos = [
@@ -25,28 +32,40 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="pt-6 flex-grow flex flex-col">
-                <Quote className="h-8 w-8 text-accent mb-4" />
-                <p className="text-foreground/70 italic flex-grow">"{testimonial.quote}"</p>
-                <div className="mt-6 flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src={testimonial.avatarUrl} alt={testimonial.clientName} data-ai-hint={testimonial.dataAiHint} />
-                    <AvatarFallback>{testimonial.clientName.substring(0, 2).toUpperCase()}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-semibold text-primary">{testimonial.clientName}</p>
-                    {testimonial.clientRole && testimonial.company && (
-                      <p className="text-sm text-muted-foreground">{testimonial.clientRole}, {testimonial.company}</p>
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
+        >
+          <CarouselContent>
+            {testimonials.map((testimonial) => (
+              <CarouselItem key={testimonial.id} className="basis-full sm:basis-1/2 lg:basis-1/3 p-2">
+                <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="pt-6 flex-grow flex flex-col">
+                    <Quote className="h-8 w-8 text-accent mb-4" />
+                    <p className="text-foreground/70 italic flex-grow">"{testimonial.quote}"</p>
+                    <div className="mt-6 flex items-center gap-4">
+                      <Avatar>
+                        <AvatarImage src={testimonial.avatarUrl} alt={testimonial.clientName} data-ai-hint={testimonial.dataAiHint} />
+                        <AvatarFallback>{testimonial.clientName.substring(0, 2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-semibold text-primary">{testimonial.clientName}</p>
+                        {testimonial.clientRole && testimonial.company && (
+                          <p className="text-sm text-muted-foreground">{testimonial.clientRole}, {testimonial.company}</p>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
 
         <div className="mt-16 pt-12 border-t border-border/40">
           <h3 className="font-headline text-2xl font-semibold text-primary text-center mb-8">
