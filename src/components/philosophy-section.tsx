@@ -1,0 +1,61 @@
+
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Target, Lightbulb, Users } from 'lucide-react';
+
+export function PhilosophySection() {
+  return (
+    <section id="philosophy" className="py-16 sm:py-24 bg-secondary/30">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="font-headline text-3xl font-bold tracking-tight text-primary sm:text-4xl mb-6">
+              Our Guiding Philosophy
+            </h2>
+            <p className="text-lg text-foreground/80 mb-6">
+              At FYCARD Consulting and Outsourcing, we believe in a client-centric approach, rooted in integrity, innovation, and a relentless pursuit of excellence. Our philosophy guides every project, ensuring we deliver not just solutions, but lasting value and strategic advantage.
+            </p>
+            <div className="space-y-6 mb-8">
+              <div className="flex items-start gap-4">
+                <Target className="h-8 w-8 text-accent flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-primary text-xl">Client-Centricity</h3>
+                  <p className="text-foreground/70">Your goals are our priority. We tailor solutions to your unique needs, ensuring strategies are aligned with your vision for success.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <Lightbulb className="h-8 w-8 text-accent flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-primary text-xl">Innovation & Insight</h3>
+                  <p className="text-foreground/70">We leverage cutting-edge methodologies and deep industry knowledge to provide forward-thinking solutions and actionable insights.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <Users className="h-8 w-8 text-accent flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-primary text-xl">Collaborative Partnership</h3>
+                  <p className="text-foreground/70">We work as an extension of your team, fostering open communication and building strong relationships to achieve shared success.</p>
+                </div>
+              </div>
+            </div>
+            <Button asChild size="lg" className="shadow-md hover:shadow-lg transition-shadow">
+              <Link href="#contact">Partner With Us</Link>
+            </Button>
+          </div>
+          <div className="relative h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-xl group">
+            <Image
+              src="https://placehold.co/800x600.png"
+              alt="Abstract image representing innovation and collaboration"
+              layout="fill"
+              objectFit="cover"
+              data-ai-hint="abstract collaboration"
+              className="transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+            />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
