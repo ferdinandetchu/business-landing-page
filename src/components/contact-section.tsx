@@ -23,7 +23,6 @@ import { useSearchParams } from 'next/navigation';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { cn } from '@/lib/utils';
 import type React from 'react';
-import { InteractiveGradientBackground } from '@/components/interactive-gradient-background';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -40,7 +39,7 @@ const AnimatedContactCard = ({ children, index }: { children: React.ReactNode; i
     <div
       ref={ref}
       className={cn(
-        "transition-all duration-700 ease-out transform h-full", // Added h-full
+        "transition-all duration-700 ease-out transform h-full",
         isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       )}
     >
@@ -81,23 +80,21 @@ export function ContactSection() {
   }
 
   return (
-    <InteractiveGradientBackground 
-      as="section" 
+    <section 
       id="contact" 
-      className="py-16 sm:py-24 bg-background" 
-      randomIdle={true}
+      className="py-16 sm:py-24 bg-gradient-to-br from-primary to-accent" 
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold tracking-tight text-primary sm:text-4xl">Get in Touch</h2>
-          <p className="mt-4 text-lg leading-8 text-foreground/80">
+          <h2 className="font-headline text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">Get in Touch</h2>
+          <p className="mt-4 text-lg leading-8 text-primary-foreground/90">
             Have questions or ready to start a project? Contact us today!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch"> {/* Changed items-start to items-stretch */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <AnimatedContactCard index={0}>
-            <Card className="shadow-xl h-full bg-card/80 backdrop-blur-sm"> {/* Added subtle transparency to card */}
+            <Card className="shadow-xl h-full bg-card/90 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="font-headline text-2xl text-primary">Send Us a Message</CardTitle>
                 <CardDescription>Fill out the form and we'll respond as soon as possible.</CardDescription>
@@ -173,7 +170,7 @@ export function ContactSection() {
 
           <AnimatedContactCard index={1}>
             <div className="space-y-8 h-full"> 
-              <Card className="shadow-xl h-full bg-card/80 backdrop-blur-sm"> {/* Added subtle transparency to card */}
+              <Card className="shadow-xl h-full bg-card/90 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="font-headline text-2xl text-primary">Direct Contact</CardTitle>
                   <CardDescription>Reach out to us directly through these channels.</CardDescription>
@@ -210,6 +207,6 @@ export function ContactSection() {
           </AnimatedContactCard>
         </div>
       </div>
-    </InteractiveGradientBackground>
+    </section>
   );
 }
