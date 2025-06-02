@@ -1,5 +1,7 @@
 
-import { testimonials } from '@/data/testimonials';
+"use client";
+
+import { testimonials, type Testimonial } from '@/data/testimonials';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Quote, Star } from 'lucide-react';
@@ -13,6 +15,39 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { InteractiveGradientBackground } from '@/components/interactive-gradient-background';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { cn } from '@/lib/utils';
+import type React from 'react';
+
+const AnimatedSentimentCard = ({ children }: { children: React.ReactNode }) => {
+  const { ref, isInView } = useScrollAnimation({ threshold: 0.1, delay: 200 });
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out transform",
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+const AnimatedTestimonialWrapper = ({ children, index }: { children: React.ReactNode; index: number }) => {
+  const { ref, isInView } = useScrollAnimation({ threshold: 0.1, triggerOnce: false, staggerDelay: 150, index });
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out transform h-full",
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      )}
+    >
+      {children}
+    </div>
+  );
+};
 
 export function TestimonialsSection() {
   const clientLogos = [
@@ -46,26 +81,28 @@ export function TestimonialsSection() {
           className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
         >
           <CarouselContent>
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, index) => (
               <CarouselItem key={testimonial.id} className="basis-full sm:basis-1/2 lg:basis-1/3 p-2">
-                <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="pt-6 flex-grow flex flex-col">
-                    <Quote className="h-8 w-8 text-accent mb-4" />
-                    <p className="text-foreground/70 italic flex-grow">"{testimonial.quote}"</p>
-                    <div className="mt-6 flex items-center gap-4">
-                      <Avatar>
-                        <AvatarImage src={testimonial.avatarUrl} alt={testimonial.clientName} data-ai-hint={testimonial.dataAiHint} />
-                        <AvatarFallback>{testimonial.clientName.substring(0, 2).toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-semibold text-primary">{testimonial.clientName}</p>
-                        {testimonial.clientRole && testimonial.company && (
-                          <p className="text-sm text-muted-foreground">{testimonial.clientRole}, {testimonial.company}</p>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <AnimatedTestimonialWrapper index={index}>
+                    <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 bg-background text-foreground">
+                      <CardContent className="pt-6 flex-grow flex flex-col">
+                        <Quote className="h-8 w-8 text-accent mb-4" />
+                        <p className="text-foreground/70 italic flex-grow">"{testimonial.quote}"</p>
+                        <div className="mt-6 flex items-center gap-4">
+                          <Avatar>
+                            <AvatarImage src={testimonial.avatarUrl} alt={testimonial.clientName} data-ai-hint={testimonial.dataAiHint} />
+                            <AvatarFallback>{testimonial.clientName.substring(0, 2).toUpperCase()}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-semibold text-primary">{testimonial.clientName}</p>
+                            {testimonial.clientRole && testimonial.company && (
+                              <p className="text-sm text-muted-foreground">{testimonial.clientRole}, {testimonial.company}</p>
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                </AnimatedTestimonialWrapper>
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -92,20 +129,22 @@ export function TestimonialsSection() {
           </div>
         </div>
 
-        <div className="mt-16 text-center">
-            <Card className="max-w-md mx-auto p-6 shadow-lg">
-              <h3 className="font-headline text-xl font-semibold text-primary mb-2">Overall Client Sentiment</h3>
-              <div className="flex items-center justify-center gap-2 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`h-6 w-6 ${i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
-                ))}
-                <span className="text-lg font-medium text-foreground/80">(4.8 / 5.0)</span>
-              </div>
-              <p className="text-muted-foreground text-sm mb-3">Based on aggregated client feedback.</p>
-              <Progress value={96} className="w-full h-2" />
-              <p className="text-sm text-accent font-medium mt-2">96% Positive Feedback</p>
-            </Card>
-        </div>
+        <AnimatedSentimentCard>
+          <div className="mt-16 text-center">
+              <Card className="max-w-md mx-auto p-6 shadow-lg bg-background text-foreground">
+                <h3 className="font-headline text-xl font-semibold text-primary mb-2">Overall Client Sentiment</h3>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className={`h-6 w-6 ${i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
+                  ))}
+                  <span className="text-lg font-medium text-foreground/80">(4.8 / 5.0)</span>
+                </div>
+                <p className="text-muted-foreground text-sm mb-3">Based on aggregated client feedback.</p>
+                <Progress value={96} className="w-full h-2" />
+                <p className="text-sm text-accent font-medium mt-2">96% Positive Feedback</p>
+              </Card>
+          </div>
+        </AnimatedSentimentCard>
       </div>
     </InteractiveGradientBackground>
   );

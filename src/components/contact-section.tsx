@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +20,9 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
 import { useSearchParams } from 'next/navigation';
-
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { cn } from '@/lib/utils';
+import type React from 'react';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -29,6 +32,21 @@ const formSchema = z.object({
 });
 
 type ContactFormValues = z.infer<typeof formSchema>;
+
+const AnimatedContactCard = ({ children, index }: { children: React.ReactNode; index: number }) => {
+  const { ref, isInView } = useScrollAnimation({ threshold: 0.1, staggerDelay: 150, index, triggerOnce: true });
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out transform h-full", // Added h-full
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      )}
+    >
+      {children}
+    </div>
+  );
+};
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -53,7 +71,6 @@ export function ContactSection() {
 
 
   async function onSubmit(data: ContactFormValues) {
-    // In a real app, you'd send this data to a server/API
     console.log("Form submitted:", data);
     toast({
       title: "Message Sent!",
@@ -72,115 +89,120 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <Card className="shadow-xl">
-            <CardHeader>
-              <CardTitle className="font-headline text-2xl text-primary">Send Us a Message</CardTitle>
-              <CardDescription>Fill out the form and we'll respond as soon as possible.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="John Doe" {...field} className="shadow-sm" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email Address</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="you@example.com" {...field} className="shadow-sm" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="service"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Service of Interest (Optional)</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., Data Analysis" {...field} className="shadow-sm" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Tell us about your project or inquiry..."
-                            rows={5}
-                            {...field}
-                            className="shadow-sm"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit" className="w-full text-lg py-3" disabled={form.formState.isSubmitting}>
-                    {form.formState.isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 h-4 w-4" /></>}
-                  </Button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
-
-          <div className="space-y-8 lg:mt-10">
-            <Card className="shadow-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch"> {/* Changed items-start to items-stretch */}
+          <AnimatedContactCard index={0}>
+            <Card className="shadow-xl h-full">
               <CardHeader>
-                <CardTitle className="font-headline text-2xl text-primary">Direct Contact</CardTitle>
-                <CardDescription>Reach out to us directly through these channels.</CardDescription>
+                <CardTitle className="font-headline text-2xl text-primary">Send Us a Message</CardTitle>
+                <CardDescription>Fill out the form and we'll respond as soon as possible.</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Mail className="h-6 w-6 text-accent" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Email</h4>
-                    <a href="mailto:info@fycardconsulting.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      info@fycardconsulting.com
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="h-6 w-6 text-accent" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Phone</h4>
-                    <a href="tel:+237671097299" className="text-muted-foreground hover:text-primary transition-colors">
-                      +237671097299
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-6 w-6 text-accent" />
-                  <div>
-                    <h4 className="font-semibold text-foreground">Office</h4>
-                    <p className="text-muted-foreground">CM Buea, Sosoliso</p>
-                  </div>
-                </div>
+              <CardContent>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Doe" {...field} className="shadow-sm" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email Address</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="you@example.com" {...field} className="shadow-sm" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="service"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Service of Interest (Optional)</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., Data Analysis" {...field} className="shadow-sm" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Message</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Tell us about your project or inquiry..."
+                              rows={5}
+                              {...field}
+                              className="shadow-sm"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button type="submit" className="w-full text-lg py-3" disabled={form.formState.isSubmitting}>
+                      {form.formState.isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 h-4 w-4" /></>}
+                    </Button>
+                  </form>
+                </Form>
               </CardContent>
             </Card>
-          </div>
+          </AnimatedContactCard>
+
+          <AnimatedContactCard index={1}>
+            {/* Removed lg:mt-10 from here as grid handles alignment */}
+            <div className="space-y-8 h-full"> 
+              <Card className="shadow-xl h-full">
+                <CardHeader>
+                  <CardTitle className="font-headline text-2xl text-primary">Direct Contact</CardTitle>
+                  <CardDescription>Reach out to us directly through these channels.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Mail className="h-6 w-6 text-accent" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">Email</h4>
+                      <a href="mailto:info@fycardconsulting.com" className="text-muted-foreground hover:text-primary transition-colors">
+                        info@fycardconsulting.com
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-6 w-6 text-accent" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">Phone</h4>
+                      <a href="tel:+237671097299" className="text-muted-foreground hover:text-primary transition-colors">
+                        +237671097299
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-6 w-6 text-accent" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">Office</h4>
+                      <p className="text-muted-foreground">CM Buea, Sosoliso</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </AnimatedContactCard>
         </div>
       </div>
     </section>
