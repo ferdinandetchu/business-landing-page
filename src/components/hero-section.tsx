@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
 
 const catchyPhrases = [
   "FYCARD Consulting and Outsourcing",
@@ -17,28 +16,46 @@ const catchyPhrases = [
 
 const staticHeroDescription = "Expert Solutions for Complex Challenges. We specialize in scientific research rewriting, data analysis, business consulting, and project management.";
 
+const TYPING_SPEED = 100; // Milliseconds per character
+const DELETING_SPEED = 70; // Milliseconds per character
+const PAUSE_DURATION = 2000; // Milliseconds to pause after typing, before deleting
+
 export function HeroSection() {
-  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-  const [isFading, setIsFading] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
-    const phraseChangeInterval = 5000; // Change phrase every 5 seconds
-    const fadeDuration = 500; // 0.5 second fade
+    let timeoutId: NodeJS.Timeout;
 
-    const timer = setInterval(() => {
-      setIsFading(true);
-      setTimeout(() => {
-        setCurrentPhraseIndex((prevIndex) => (prevIndex + 1) % catchyPhrases.length);
-        setIsFading(false);
-      }, fadeDuration);
-    }, phraseChangeInterval);
+    if (isDeleting) {
+      if (subIndex > 0) {
+        timeoutId = setTimeout(() => {
+          setDisplayedText(catchyPhrases[phraseIndex].substring(0, subIndex - 1));
+          setSubIndex(subIndex - 1);
+        }, DELETING_SPEED);
+      } else {
+        setIsDeleting(false);
+        setPhraseIndex((prevIndex) => (prevIndex + 1) % catchyPhrases.length);
+        // subIndex will reset to 0 naturally via the other branch
+      }
+    } else { // Typing
+      if (subIndex < catchyPhrases[phraseIndex].length) {
+        timeoutId = setTimeout(() => {
+          setDisplayedText(catchyPhrases[phraseIndex].substring(0, subIndex + 1));
+          setSubIndex(subIndex + 1);
+        }, TYPING_SPEED);
+      } else { // Finished typing
+        timeoutId = setTimeout(() => {
+          setIsDeleting(true);
+        }, PAUSE_DURATION);
+      }
+    }
 
-    return () => {
-      clearInterval(timer);
-      // Clear any pending timeouts if component unmounts
-      // This might require storing the setTimeout id if more complex logic is needed
-    };
-  }, []);
+    return () => clearTimeout(timeoutId);
+  }, [subIndex, isDeleting, phraseIndex]);
+
 
   return (
     <section
@@ -63,12 +80,10 @@ export function HeroSection() {
       <div className="relative flex-grow flex flex-col justify-center items-center z-10 pt-14"> {/* Added pt-14 to offset navbar height */}
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h1
-            className={cn(
-              "font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl transition-opacity duration-500 ease-in-out",
-              isFading ? "opacity-0" : "opacity-100"
-            )}
+            className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl min-h-[1.2em]" // min-h to prevent collapse, adjust as needed
           >
-            {catchyPhrases[currentPhraseIndex]}
+            {displayedText || <>&nbsp;</>}
+            <span className="animate-blink text-accent ml-1">|</span>
           </h1>
           <p
             className="mt-4 max-w-3xl mx-auto text-lg leading-8 text-neutral-200 sm:text-xl"
