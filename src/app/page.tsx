@@ -1,4 +1,5 @@
 
+import { Suspense } from 'react';
 import { Footer } from '@/components/layout/footer';
 import { HeroSection } from '@/components/hero-section';
 import { ServicesSection } from '@/components/services-section';
@@ -17,8 +18,10 @@ export default function HomePage() {
         <ServicesSection />
         <PhilosophySection />
         <TestimonialsSection />
-        <BusinessAdvisorTool />
-        <ContactSection />
+        <BusinessAdvisorTool /> {/* Assuming BusinessAdvisorTool does not use useSearchParams or is already handled */}
+        <Suspense fallback={<div>Loading contact form...</div>}>
+          <ContactSection />
+        </Suspense>
       </main>
       <Footer />
     </div>
